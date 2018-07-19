@@ -1,11 +1,22 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="btnSignIn" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">#FB8C00</item>
+        <item name="android:textColor">#000</item>
+        <item name="android:bottomLeftRadius">20dp</item>
+    </style>
+
+    <style name="button2" parent="Widget.AppCompat.Button.Borderless">
+
     </style>
 
 </resources>
