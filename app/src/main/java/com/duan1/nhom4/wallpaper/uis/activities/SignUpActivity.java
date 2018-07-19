@@ -1,7 +1,9 @@
 package com.duan1.nhom4.wallpaper.uis.activities;
 
 import android.content.Intent;
+import android.support.v7.widget.AppCompatButton;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.duan1.nhom4.wallpaper.uis.BaseActivity;
@@ -9,7 +11,7 @@ import com.duan1.nhom4.wallpaper.R;
 
 public class SignUpActivity extends BaseActivity {
 
-    ImageView imgBack;
+    AppCompatButton imgBack;
 
     @Override
     public int injectLayout() {
@@ -18,7 +20,7 @@ public class SignUpActivity extends BaseActivity {
 
     @Override
     public void intialView() {
-        imgBack = findViewById(R.id.imgBack);
+        imgBack = findViewById(R.id.btnBack);
     }
 
     @Override

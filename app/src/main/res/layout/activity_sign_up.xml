@@ -16,11 +16,12 @@
             android:scaleType="fitXY"
             android:src="@drawable/background_sign_up" />
 
-        <ImageView
-            android:id="@+id/imgBack"
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnBack"
+            style="@style/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_keyboard_arrow_left" />
+            android:drawableLeft="@drawable/ic_keyboard_arrow_left" />
 
     </RelativeLayout>
 
