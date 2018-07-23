@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestClient {
 
-    public static final String BASE_API = "https://api.androidhive.info/";
+    public static final String BASE_API = "http://nhom4.dotplays.com/";
     private static Retrofit retrofit;
 
     public static Retrofit getRestClient() {

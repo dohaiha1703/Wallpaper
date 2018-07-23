@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+
+        <item
+            android:id="@+id/collection"
+            android:icon="@drawable/ic_collections"
+            android:title="Collection" />
+
+
+        <item
+            android:id="@+id/favorite"
+            android:icon="@drawable/ic_favorite"
+            android:title="Favorite" />
+
+
+        <item
+            android:id="@+id/download"
+            android:icon="@drawable/ic_action_download"
+            android:title="Download" />
+    </group>
+
+
+    <item android:title="Infomation">
+        <menu>
+            <item
+                android:id="@+id/about"
+                android:icon="@drawable/ic_info"
+                android:title="About us" />
+
+            <item
+                android:id="@+id/sign_out"
+                android:icon="@drawable/ic_action_exit"
+                android:title="Sign Out" />
+        </menu>
+    </item>
+
+</menu>

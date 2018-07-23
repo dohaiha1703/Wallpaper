@@ -9,7 +9,7 @@ import com.duan1.nhom4.wallpaper.uis.BaseActivity;
 
 public class SignInActivity extends BaseActivity {
 
-    AppCompatButton btnSignUp;
+    AppCompatButton btnSignUp, btnLogIn;
 
     @Override
     public int injectLayout() {
@@ -19,6 +19,7 @@ public class SignInActivity extends BaseActivity {
     @Override
     public void intialView() {
         btnSignUp = findViewById(R.id.btnSignUp);
+        btnLogIn = findViewById(R.id.btnLogin);
     }
 
     @Override
@@ -27,11 +28,20 @@ public class SignInActivity extends BaseActivity {
     }
 
     public void eventClick(){
+
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
                 startActivity(intent);
+            }
+        });
+
+
+        btnLogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignInActivity.this, HomeActivity.class));
             }
         });
     }
