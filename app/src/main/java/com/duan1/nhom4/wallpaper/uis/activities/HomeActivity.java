@@ -99,7 +99,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     public void createRecyclerView() {
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 3);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
