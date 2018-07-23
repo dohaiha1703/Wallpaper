@@ -86,8 +86,9 @@
 
 
         <android.support.v7.widget.AppCompatButton
-            android:layout_width="0dp"
             style="@style/btnSignIn"
+            android:id="@+id/btnLogin"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
