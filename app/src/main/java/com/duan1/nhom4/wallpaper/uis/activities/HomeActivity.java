@@ -1,5 +1,6 @@
 package com.duan1.nhom4.wallpaper.uis.activities;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -71,6 +72,7 @@ public class HomeActivity extends BaseActivity {
                 switch (item.getItemId()) {
                     case R.id.collection:
                         Toast.makeText(mContext, "collection", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(HomeActivity.this, CollectionActivity.class));
                         break;
 
                     case R.id.download:
@@ -89,6 +91,8 @@ public class HomeActivity extends BaseActivity {
 
                     case R.id.sign_out:
                         Toast.makeText(mContext, "exit", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(HomeActivity.this, SignInActivity.class));
+                        finish();
                         break;
                 }
 
