@@ -12,10 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.adapter.HomeRecyclerviewAdapter;
 import com.duan1.nhom4.wallpaper.model.HomeItem;
 import com.duan1.nhom4.wallpaper.uis.BaseActivity;
+import com.duan1.nhom4.wallpaper.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,11 +77,13 @@ public class HomeActivity extends BaseActivity {
 
                     case R.id.download:
                         Toast.makeText(mContext, "download", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(HomeActivity.this, DownloadActivity.class));
                         break;
 
 
                     case R.id.favorite:
                         Toast.makeText(mContext, "favorite", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(HomeActivity.this, FavoriteActivity.class));
                         break;
 
 
