@@ -32,7 +32,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.imageView01.setImageResource(R.drawable.logofb);
+        holder.imageView01.setImageResource(R.drawable.oto02);
         holder.imgIcon01.setImageResource(R.drawable.ic_action_star_0);
         holder.name01.setText("Cars");
         holder.note01.setText("noteeeeeeeeeeeeeeeeeeeeee thong tin");
