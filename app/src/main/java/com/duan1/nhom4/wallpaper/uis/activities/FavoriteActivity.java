@@ -3,6 +3,7 @@ package com.duan1.nhom4.wallpaper.uis.activities;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -53,7 +54,7 @@ public class FavoriteActivity extends BaseActivity {
         });
 
 
-        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager1 = new GridLayoutManager(this, 3);
         recyclerPlace.setLayoutManager(layoutManager1);
         recyclerPlace.setAdapter(adapter);
         fakeData();
