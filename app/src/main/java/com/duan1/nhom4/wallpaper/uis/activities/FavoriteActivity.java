@@ -20,26 +20,30 @@ public class FavoriteActivity extends BaseActivity {
     private RecyclerView recyclerPlace;
     private List<RecycelViewDowload> recycelViews;
     private DowloadRecycelAdapter adapter;
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
+    private Toolbar toolbar;
 
     @Override
     public int injectLayout() {
         return R.layout.activity_favorite;
-
     }
 
     @Override
     public void intialView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitle("Favorite");
+        toolbar = findViewById(R.id.toolbarFavoriteActivity);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        recyclerPlace = findViewById(R.id.recyclerView);
+        recycelViews = new ArrayList<>();
+        adapter = new DowloadRecycelAdapter(recycelViews);
+
+
+    }
+
+    @Override
+    public void intialVariables() {
+
+        toolbar.setTitle("Favorite");
+        toolbar.setNavigationIcon(R.drawable.ic_keyboard_arrow_left);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,19 +52,11 @@ public class FavoriteActivity extends BaseActivity {
             }
         });
 
-        recyclerPlace = findViewById(R.id.recyclerView);
-        recycelViews = new ArrayList<>();
-        adapter = new DowloadRecycelAdapter(recycelViews);
 
         RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(this);
         recyclerPlace.setLayoutManager(layoutManager1);
         recyclerPlace.setAdapter(adapter);
         fakeData();
-
-    }
-
-    @Override
-    public void intialVariables() {
 
     }
 

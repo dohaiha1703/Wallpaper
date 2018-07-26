@@ -2,8 +2,6 @@
 package com.duan1.nhom4.wallpaper.uis.activities;
 
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +19,7 @@ public class DownloadActivity extends BaseActivity {
     private RecyclerView recyclerPlace;
     private List<RecycelViewDowload> recycelViews;
     private DowloadRecycelAdapter adapter;
+    private Toolbar toolbar;
 
     @Override
     public int injectLayout() {
@@ -29,12 +28,20 @@ public class DownloadActivity extends BaseActivity {
 
     @Override
     public void intialView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitle("Download");
+        toolbar = findViewById(R.id.toolbarDownloadActivity);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        recyclerPlace = findViewById(R.id.recyclerView);
+        recycelViews = new ArrayList<>();
+        adapter = new DowloadRecycelAdapter(recycelViews);
+    }
+
+    @Override
+    public void intialVariables() {
+
+        toolbar.setTitle("Download");
+        toolbar.setNavigationIcon(R.drawable.ic_keyboard_arrow_left);
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,22 +49,14 @@ public class DownloadActivity extends BaseActivity {
             }
         });
 
-        recyclerPlace = findViewById(R.id.recyclerView);
-        recycelViews = new ArrayList<>();
-        adapter = new DowloadRecycelAdapter(recycelViews);
 
         RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(this);
         recyclerPlace.setLayoutManager(layoutManager1);
         recyclerPlace.setAdapter(adapter);
         fakeData();
-
     }
 
-    @Override
-    public void intialVariables() {
-
-    }
-    public void fakeData(){
+    public void fakeData() {
         for (int i = 0; i < 40; i++) {
             RecycelViewDowload recycelView = new RecycelViewDowload("", "", "");
             recycelViews.add(recycelView);

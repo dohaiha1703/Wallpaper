@@ -13,10 +13,13 @@ import com.duan1.nhom4.wallpaper.model.RecycelViewDowload;
 import java.util.List;
 
 public class DowloadRecycelAdapter extends RecyclerView.Adapter<DowloadRecycelAdapter.ViewHoder> {
+
     private List<RecycelViewDowload> dowloadList;
-    public DowloadRecycelAdapter(List<RecycelViewDowload> dowloadList){
+
+    public DowloadRecycelAdapter(List<RecycelViewDowload> dowloadList) {
         this.dowloadList = dowloadList;
     }
+
     @NonNull
     @Override
     public ViewHoder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,6 +42,7 @@ public class DowloadRecycelAdapter extends RecyclerView.Adapter<DowloadRecycelAd
         private ImageView imgImage;
         private ImageView imgImage1;
         private ImageView imgImage2;
+
         public ViewHoder(View itemView) {
             super(itemView);
             imgImage = itemView.findViewById(R.id.imgBackground);
