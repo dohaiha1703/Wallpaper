@@ -10,17 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.duan1.nhom4.wallpaper.R;
+import com.duan1.nhom4.wallpaper.model.CollectionsItem;
 
 import java.util.List;
 
 public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.ViewHolder> {
 
-    private Context context;
-    private List<String> stringList;
+    private List<CollectionsItem> items;
 
-    public CollectionAdapter(Context context, List<String> stringList) {
-        this.context = context;
-        this.stringList = stringList;
+    public CollectionAdapter( List<CollectionsItem> items) {
+        this.items = items;
     }
 
     @NonNull
@@ -32,15 +31,14 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.imageView01.setImageResource(R.drawable.oto02);
-        holder.imgIcon01.setImageResource(R.drawable.ic_action_star_0);
-        holder.name01.setText("Cars");
-        holder.note01.setText("noteeeeeeeeeeeeeeeeeeeeee thong tin");
+       CollectionsItem collectionsItem = items.get(position);
+       holder.name01.setText(collectionsItem.getName());
+       holder.note01.setText(collectionsItem.getNote());
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return items.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
