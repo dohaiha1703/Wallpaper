@@ -4,6 +4,7 @@ package com.duan1.nhom4.wallpaper.uis.activities;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -45,9 +46,8 @@ public class DownloadActivity extends BaseActivity {
         recyclerPlace = findViewById(R.id.recyclerView);
         recycelViews = new ArrayList<>();
         adapter = new DowloadRecycelAdapter(recycelViews);
-
-        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(this);
-        recyclerPlace.setLayoutManager(layoutManager1);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 3);
+        recyclerPlace.setLayoutManager(layoutManager);
         recyclerPlace.setAdapter(adapter);
         fakeData();
 
