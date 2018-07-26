@@ -8,14 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.duan1.nhom4.wallpaper.R;
-import com.duan1.nhom4.wallpaper.model.RecycelViewDowload;
+import com.duan1.nhom4.wallpaper.model.RecycelViewFavorite;
 
 import java.util.List;
 
-public class DowloadRecycelAdapter extends RecyclerView.Adapter<DowloadRecycelAdapter.ViewHoder> {
-    private List<RecycelViewDowload> dowloadList;
-    public DowloadRecycelAdapter(List<RecycelViewDowload> dowloadList){
-        this.dowloadList = dowloadList;
+public class FavoriteRecycelViewAdapter extends RecyclerView.Adapter<FavoriteRecycelViewAdapter.ViewHoder> {
+    private List<RecycelViewFavorite> favoriteList;
+    public FavoriteRecycelViewAdapter(List<RecycelViewFavorite> favorites){
+        this.favoriteList = favorites;
+
     }
     @NonNull
     @Override
@@ -27,19 +28,19 @@ public class DowloadRecycelAdapter extends RecyclerView.Adapter<DowloadRecycelAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHoder holder, int position) {
-        RecycelViewDowload recycelViewDowload = dowloadList.get(position);
+        RecycelViewFavorite viewFavorite = favoriteList.get(position);
     }
 
     @Override
     public int getItemCount() {
-        return dowloadList.size();
+        return favoriteList.size();
     }
 
     public class ViewHoder extends RecyclerView.ViewHolder {
-        private ImageView imgImage;
+        private ImageView imageView;
         public ViewHoder(View itemView) {
             super(itemView);
-            imgImage = itemView.findViewById(R.id.imgBackground);
+            imageView = itemView.findViewById(R.id.imgBackground);
         }
     }
 }
