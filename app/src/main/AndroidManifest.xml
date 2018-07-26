@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".uis.activities.MainActivity"
+            android:name=".uis.activities.HomeDetailActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +21,7 @@
         <activity android:name=".uis.activities.SignUpActivity" />
         <activity android:name=".uis.activities.SignInActivity" />
         <activity android:name=".uis.activities.HomeActivity" />
-        <activity android:name=".uis.activities.HomeDetailActivity" />
+        <activity android:name=".uis.activities.MainActivity" />
         <activity android:name=".uis.activities.CollectionActivity" />
         <activity android:name=".uis.activities.SubjectActivity" />
         <activity android:name=".uis.activities.SubjectDetailActivity" />
