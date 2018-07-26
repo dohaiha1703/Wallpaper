@@ -22,7 +22,7 @@ public class FavoriteRecycelViewAdapter extends RecyclerView.Adapter<FavoriteRec
     @Override
     public ViewHoder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.item_recycel, parent, false);
+        View itemView = inflater.inflate(R.layout.item_download_favorite, parent, false);
         return new ViewHoder(itemView);
     }
 
