@@ -2,11 +2,14 @@ package com.duan1.nhom4.wallpaper.uis.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toolbar;
 
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.uis.BaseActivity;
 
 public class HomeDetailActivity extends BaseActivity {
+
+    private android.support.v7.widget.Toolbar toolbar;
 
 
     @Override
@@ -16,11 +19,13 @@ public class HomeDetailActivity extends BaseActivity {
 
     @Override
     public void intialView() {
+        toolbar = findViewById(R.id.toolbarHomeDetail);
+
 
     }
 
     @Override
     public void intialVariables() {
-
+        toolbar.setNavigationIcon(R.drawable.ic_keyboard_arrow_left);
     }
 }
