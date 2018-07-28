@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".uis.activities.HomeDetailActivity"
+            android:name=".uis.activities.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +21,7 @@
         <activity android:name=".uis.activities.SignUpActivity" />
         <activity android:name=".uis.activities.SignInActivity" />
         <activity android:name=".uis.activities.HomeActivity" />
-        <activity android:name=".uis.activities.MainActivity" />
+        <activity android:name=".uis.activities.HomeDetailActivity" />
         <activity android:name=".uis.activities.CollectionActivity" />
         <activity android:name=".uis.activities.SubjectActivity" />
         <activity android:name=".uis.activities.SubjectDetailActivity" />
@@ -30,8 +30,9 @@
         <activity android:name=".uis.activities.DownloadActivity" />
         <activity android:name=".uis.activities.DownloadDetailActivity" />
         <activity android:name=".uis.activities.SearchActivity" />
-        <activity android:name=".uis.activities.NotificationActivity"></activity>
-
+        <activity android:name=".uis.activities.NotificationActivity" />
+        <activity android:name=".uis.activities.ListCollection" />
+        <activity android:name=".uis.activities.CollectionDetailActivity"></activity>
     </application>
 
 </manifest>
