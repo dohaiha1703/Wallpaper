@@ -37,7 +37,7 @@ public class FavoriteActivity extends BaseActivity {
 
         recyclerPlace = findViewById(R.id.recyclerView);
         recycelViews = new ArrayList<>();
-        adapter = new FavoriteRecycelViewAdapter(recycelViews);
+        adapter = new FavoriteRecycelViewAdapter(getApplicationContext() ,recycelViews);
 
 
     }

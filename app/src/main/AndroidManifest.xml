@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.duan1.nhom4.wallpaper">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.SET_WALLPAPER"/>
 
     <application
         android:allowBackup="true"
@@ -10,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".uis.activities.HomeDetailActivity"
+            android:name=".uis.activities.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +23,7 @@
         <activity android:name=".uis.activities.SignUpActivity" />
         <activity android:name=".uis.activities.SignInActivity" />
         <activity android:name=".uis.activities.HomeActivity" />
-        <activity android:name=".uis.activities.MainActivity" />
+        <activity android:name=".uis.activities.HomeDetailActivity" />
         <activity android:name=".uis.activities.CollectionActivity" />
         <activity android:name=".uis.activities.SubjectActivity" />
         <activity android:name=".uis.activities.SubjectDetailActivity" />
