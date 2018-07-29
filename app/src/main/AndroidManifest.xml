@@ -32,8 +32,9 @@
         <activity android:name=".uis.activities.DownloadActivity" />
         <activity android:name=".uis.activities.DownloadDetailActivity" />
         <activity android:name=".uis.activities.SearchActivity" />
-        <activity android:name=".uis.activities.NotificationActivity"></activity>
-
+        <activity android:name=".uis.activities.NotificationActivity" />
+        <activity android:name=".uis.activities.ListCollection" />
+        <activity android:name=".uis.activities.CollectionDetailActivity"></activity>
     </application>
 
 </manifest>
