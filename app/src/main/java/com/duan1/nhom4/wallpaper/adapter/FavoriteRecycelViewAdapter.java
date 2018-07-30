@@ -14,9 +14,9 @@ import java.util.List;
 
 public class FavoriteRecycelViewAdapter extends RecyclerView.Adapter<FavoriteRecycelViewAdapter.ViewHoder> {
     private List<RecycelViewFavorite> favoriteList;
+
     public FavoriteRecycelViewAdapter(List<RecycelViewFavorite> favorites){
         this.favoriteList = favorites;
-
     }
     @NonNull
     @Override

@@ -37,7 +37,9 @@
 
 
                 <ImageView
+                    android:id="@+id/imgSearch"
                     android:layout_width="0dp"
+                    android:onClick="openSearchActivity"
                     android:layout_height="match_parent"
                     android:layout_weight="1.5"
                     android:padding="7dp"

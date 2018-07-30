@@ -11,7 +11,9 @@ import android.view.View;
 
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.adapter.DowloadRecycelAdapter;
+import com.duan1.nhom4.wallpaper.adapter.FavoriteRecycelViewAdapter;
 import com.duan1.nhom4.wallpaper.model.RecycelViewDowload;
+import com.duan1.nhom4.wallpaper.model.RecycelViewFavorite;
 import com.duan1.nhom4.wallpaper.uis.BaseActivity;
 
 import java.util.ArrayList;
@@ -19,8 +21,8 @@ import java.util.List;
 
 public class FavoriteActivity extends BaseActivity {
     private RecyclerView recyclerPlace;
-    private List<RecycelViewDowload> recycelViews;
-    private DowloadRecycelAdapter adapter;
+    private List<RecycelViewFavorite> recycelViews;
+    private FavoriteRecycelViewAdapter adapter;
     private Toolbar toolbar;
 
     @Override
@@ -35,7 +37,7 @@ public class FavoriteActivity extends BaseActivity {
 
         recyclerPlace = findViewById(R.id.recyclerView);
         recycelViews = new ArrayList<>();
-        adapter = new DowloadRecycelAdapter(recycelViews);
+        adapter = new FavoriteRecycelViewAdapter (recycelViews);
 
 
     }
@@ -49,7 +51,7 @@ public class FavoriteActivity extends BaseActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+               finish();
             }
         });
 
@@ -63,7 +65,7 @@ public class FavoriteActivity extends BaseActivity {
 
     public void fakeData() {
         for (int i = 0; i < 40; i++) {
-            RecycelViewDowload recycelView = new RecycelViewDowload("", "", "");
+            RecycelViewFavorite recycelView = new RecycelViewFavorite("");
             recycelViews.add(recycelView);
         }
         adapter.notifyDataSetChanged();

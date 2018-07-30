@@ -34,7 +34,7 @@ public class DownloadActivity extends BaseActivity {
 
         recyclerPlace = findViewById(R.id.recyclerView);
         recycelViews = new ArrayList<>();
-        adapter = new DowloadRecycelAdapter(recycelViews);
+        adapter = new DowloadRecycelAdapter(recycelViews, getApplicationContext());
     }
 
     @Override
@@ -46,7 +46,7 @@ public class DownloadActivity extends BaseActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                finish();
             }
         });
 

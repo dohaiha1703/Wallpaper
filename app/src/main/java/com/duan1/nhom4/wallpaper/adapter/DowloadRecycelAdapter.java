@@ -1,5 +1,7 @@
 package com.duan1.nhom4.wallpaper.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,14 +11,19 @@ import android.widget.ImageView;
 
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.model.RecycelViewDowload;
+import com.duan1.nhom4.wallpaper.uis.activities.DownloadDetailActivity;
 
 import java.util.List;
 
 public class DowloadRecycelAdapter extends RecyclerView.Adapter<DowloadRecycelAdapter.ViewHoder> {
     private List<RecycelViewDowload> dowloadList;
-    public DowloadRecycelAdapter(List<RecycelViewDowload> dowloadList){
+    private Context context;
+
+    public DowloadRecycelAdapter(List<RecycelViewDowload> dowloadList, Context context) {
         this.dowloadList = dowloadList;
+        this.context = context;
     }
+
     @NonNull
     @Override
     public ViewHoder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -28,6 +35,16 @@ public class DowloadRecycelAdapter extends RecyclerView.Adapter<DowloadRecycelAd
     @Override
     public void onBindViewHolder(@NonNull ViewHoder holder, int position) {
         RecycelViewDowload recycelViewDowload = dowloadList.get(position);
+
+
+        holder.imgImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DownloadDetailActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -37,6 +54,7 @@ public class DowloadRecycelAdapter extends RecyclerView.Adapter<DowloadRecycelAd
 
     public class ViewHoder extends RecyclerView.ViewHolder {
         private ImageView imgImage;
+
         public ViewHoder(View itemView) {
             super(itemView);
             imgImage = itemView.findViewById(R.id.imgBackground);

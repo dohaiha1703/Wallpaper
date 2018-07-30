@@ -49,7 +49,7 @@ public class CollectionActivity extends BaseActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CollectionActivity.this, HomeActivity.class));
+                finish();
             }
         });
 

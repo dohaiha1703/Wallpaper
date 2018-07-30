@@ -9,7 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.duan1.nhom4.wallpaper.adapter.HomeRecyclerviewAdapter;
@@ -43,7 +45,7 @@ public class HomeActivity extends BaseActivity {
 
         recyclerView = findViewById(R.id.rvHomeItem);
         items = new ArrayList<>();
-        adapter = new HomeRecyclerviewAdapter(items);
+        adapter = new HomeRecyclerviewAdapter(items, getApplicationContext());
 
     }
 
@@ -118,5 +120,9 @@ public class HomeActivity extends BaseActivity {
             items.add(item);
         }
         adapter.notifyDataSetChanged();
+    }
+
+    public void openSearchActivity(View view) {
+        startActivity(new Intent(HomeActivity.this, SearchActivity.class));
     }
 }

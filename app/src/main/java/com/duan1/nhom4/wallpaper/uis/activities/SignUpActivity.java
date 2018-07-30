@@ -2,6 +2,7 @@ package com.duan1.nhom4.wallpaper.uis.activities;
 
 import android.content.Intent;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,7 +12,7 @@ import com.duan1.nhom4.wallpaper.R;
 
 public class SignUpActivity extends BaseActivity {
 
-    AppCompatButton imgBack;
+    Toolbar toolbar;
 
     @Override
     public int injectLayout() {
@@ -20,20 +21,16 @@ public class SignUpActivity extends BaseActivity {
 
     @Override
     public void intialView() {
-        imgBack = findViewById(R.id.btnBack);
+        toolbar = findViewById(R.id.toolbarSignUp);
     }
 
     @Override
     public void intialVariables() {
-        eventClick();
-    }
-
-    public void eventClick() {
-        imgBack.setOnClickListener(new View.OnClickListener() {
+        toolbar.setNavigationIcon(R.drawable.ic_keyboard_arrow_left_white);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
     }
