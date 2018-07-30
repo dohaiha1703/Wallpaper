@@ -35,7 +35,7 @@ public class ListCollection extends BaseActivity {
         toolbar = findViewById(R.id.toolbarListCollection);
         recyclerView = findViewById(R.id.recyclerViewListCollection);
         collectionItems = new ArrayList<>();
-        adapter = new ListCollectionAdapter(collectionItems);
+        adapter = new ListCollectionAdapter(getApplicationContext(),collectionItems);
     }
 
     @Override

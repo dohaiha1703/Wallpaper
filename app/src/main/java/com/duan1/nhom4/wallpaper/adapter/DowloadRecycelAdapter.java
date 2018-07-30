@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.model.RecycelViewDowload;
@@ -31,7 +32,7 @@ public class DowloadRecycelAdapter extends RecyclerView.Adapter<DowloadRecycelAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHoder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHoder holder, final int position) {
         RecycelViewDowload recycelViewDowload = dowloadList.get(position);
 
         holder.imgImage.setOnClickListener(new View.OnClickListener() {
