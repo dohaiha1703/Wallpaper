@@ -1,9 +1,12 @@
 package com.duan1.nhom4.wallpaper.model;
 
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+
 public class RecycelViewDowload {
     private String placeImage;
 
-    public RecycelViewDowload(String placeImage, String placeImage1, String placeImage2) {
+    public RecycelViewDowload(String placeImage) {
         this.placeImage = placeImage;
     }
 

@@ -1,6 +1,7 @@
 package com.duan1.nhom4.wallpaper.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.model.CollectionsItem;
+import com.duan1.nhom4.wallpaper.uis.activities.ListCollection;
 
 import java.util.List;
 
@@ -51,6 +53,14 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
             name01 = itemView.findViewById(R.id.tvName01);
             note01 = itemView.findViewById(R.id.tvNote01);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = v.getContext();
+                    Intent intent = new Intent(context, ListCollection.class);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

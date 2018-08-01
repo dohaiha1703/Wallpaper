@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.duan1.nhom4.wallpaper">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.SET_WALLPAPER"/>
 
     <application
         android:allowBackup="true"
@@ -18,10 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".uis.activities.SignUpActivity"/>
+        <activity android:name=".uis.activities.SignUpActivity" />
         <activity android:name=".uis.activities.SignInActivity" />
         <activity android:name=".uis.activities.HomeActivity" />
-        <activity android:name=".uis.activities.SearchActivity" />
+        <activity android:name=".uis.activities.HomeDetailActivity" />
         <activity android:name=".uis.activities.CollectionActivity" />
         <activity android:name=".uis.activities.SubjectActivity" />
         <activity android:name=".uis.activities.SubjectDetailActivity" />
@@ -29,9 +31,10 @@
         <activity android:name=".uis.activities.FavoriteDetailActivity" />
         <activity android:name=".uis.activities.DownloadActivity" />
         <activity android:name=".uis.activities.DownloadDetailActivity" />
-        <activity android:name=".uis.activities.HomeDetailActivity" />
-        <activity android:name=".uis.activities.NotificationActivity"></activity>
-
+        <activity android:name=".uis.activities.SearchActivity" />
+        <activity android:name=".uis.activities.NotificationActivity" />
+        <activity android:name=".uis.activities.ListCollection" />
+        <activity android:name=".uis.activities.CollectionDetailActivity"></activity>
     </application>
 
 </manifest>

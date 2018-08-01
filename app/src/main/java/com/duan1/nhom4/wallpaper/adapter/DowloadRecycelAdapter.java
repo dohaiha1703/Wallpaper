@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.model.RecycelViewDowload;
@@ -17,13 +18,11 @@ import java.util.List;
 
 public class DowloadRecycelAdapter extends RecyclerView.Adapter<DowloadRecycelAdapter.ViewHoder> {
     private List<RecycelViewDowload> dowloadList;
-    private Context context;
-
-    public DowloadRecycelAdapter(List<RecycelViewDowload> dowloadList, Context context) {
+    private Context mContext;
+    public DowloadRecycelAdapter(Context context, List<RecycelViewDowload> dowloadList){
         this.dowloadList = dowloadList;
-        this.context = context;
+        this.mContext = context;
     }
-
     @NonNull
     @Override
     public ViewHoder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,16 +32,15 @@ public class DowloadRecycelAdapter extends RecyclerView.Adapter<DowloadRecycelAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHoder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHoder holder, final int position) {
         RecycelViewDowload recycelViewDowload = dowloadList.get(position);
-
 
         holder.imgImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, DownloadDetailActivity.class);
+                Intent intent = new Intent(mContext, DownloadDetailActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+                mContext.startActivity(intent);
             }
         });
     }
@@ -54,7 +52,6 @@ public class DowloadRecycelAdapter extends RecyclerView.Adapter<DowloadRecycelAd
 
     public class ViewHoder extends RecyclerView.ViewHolder {
         private ImageView imgImage;
-
         public ViewHoder(View itemView) {
             super(itemView);
             imgImage = itemView.findViewById(R.id.imgBackground);

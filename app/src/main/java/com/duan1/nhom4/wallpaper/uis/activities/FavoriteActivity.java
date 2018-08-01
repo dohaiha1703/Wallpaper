@@ -37,7 +37,7 @@ public class FavoriteActivity extends BaseActivity {
 
         recyclerPlace = findViewById(R.id.recyclerView);
         recycelViews = new ArrayList<>();
-        adapter = new FavoriteRecycelViewAdapter (recycelViews);
+        adapter = new FavoriteRecycelViewAdapter(getApplicationContext() ,recycelViews);
 
 
     }
@@ -51,7 +51,7 @@ public class FavoriteActivity extends BaseActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               finish();
+                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
             }
         });
 
