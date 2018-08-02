@@ -1,5 +1,7 @@
 package com.duan1.nhom4.wallpaper.uis.activities;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -7,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -14,13 +17,25 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.duan1.nhom4.wallpaper.adapter.HomeRecyclerviewAdapter;
 import com.duan1.nhom4.wallpaper.model.HomeItem;
+import com.duan1.nhom4.wallpaper.rest.GetAllImagRestClient;
+import com.duan1.nhom4.wallpaper.rest.RestClient;
 import com.duan1.nhom4.wallpaper.uis.BaseActivity;
 import com.duan1.nhom4.wallpaper.R;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends BaseActivity {
 
@@ -30,6 +45,10 @@ public class HomeActivity extends BaseActivity {
     private RecyclerView recyclerView;
     private List<HomeItem> items;
     private HomeRecyclerviewAdapter adapter;
+    private List<String> listLink;
+    private List<String> listNameImage;
+
+    ProgressDialog dialog;
 
 
     @Override
@@ -47,12 +66,18 @@ public class HomeActivity extends BaseActivity {
         items = new ArrayList<>();
         adapter = new HomeRecyclerviewAdapter(items, getApplicationContext());
 
+        listLink = new ArrayList<>();
+        listNameImage = new ArrayList<>();
+
+        dialog = new ProgressDialog(HomeActivity.this);
     }
 
     @Override
     public void intialVariables() {
         createToolBarAndNavgation();
         createRecyclerView();
+        getLinkAllMedia();
+        showSpinerProgress();
     }
 
     public void createToolBarAndNavgation() {
@@ -95,7 +120,6 @@ public class HomeActivity extends BaseActivity {
 
                     case R.id.sign_out:
                         Toast.makeText(mContext, "exit", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(HomeActivity.this, SignInActivity.class));
                         finish();
                         break;
                 }
@@ -110,13 +134,11 @@ public class HomeActivity extends BaseActivity {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
-        fakeData();
     }
 
     private void fakeData() {
-        for (int i = 0; i < 40; i++) {
-            HomeItem item = new HomeItem("", "item "+i);
+        for (int i = 0; i < 50; i++) {
+            HomeItem item = new HomeItem(listLink.get(i), listNameImage.get(i));
             items.add(item);
         }
         adapter.notifyDataSetChanged();
@@ -124,5 +146,63 @@ public class HomeActivity extends BaseActivity {
 
     public void openSearchActivity(View view) {
         startActivity(new Intent(HomeActivity.this, SearchActivity.class));
+    }
+
+    public void getLinkAllMedia() {
+        Call<JsonElement> call = GetAllImagRestClient.getApiInterface().getAllMedia();
+
+        call.enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                JsonElement jsonElement = response.body();
+                JsonArray jsonArray = jsonElement.getAsJsonArray();
+                if (jsonArray.size() > 0) {
+                    for (int i = 0; i < jsonArray.size(); i++) {
+                        JsonObject objectImg = jsonArray.get(i).getAsJsonObject();
+                        String link = objectImg.get("source_url").getAsString();
+
+                        JsonObject titleObject = objectImg.getAsJsonObject("title");
+                        String name = titleObject.get("rendered").getAsString();
+                        listLink.add(link);
+                        listNameImage.add(name);
+                    }
+                }
+                Log.e("sizeLink", listLink.size() + "");
+                Log.e("sizeName", listNameImage.size() + "");
+                fakeData();
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+                Log.e("sizeLink", "failed");
+            }
+        });
+    }
+
+    public void showSpinerProgress() {
+
+        //lap thong tin
+//        dialog.setTitle("open");
+        dialog.setMessage("Loading");
+//
+//        dialog.setButton(ProgressDialog.BUTTON_POSITIVE, "YES", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//            }
+//        });
+
+        //thiet lap k the huy - co the huy
+        dialog.setCancelable(true);
+
+        //show dialog
+        dialog.show();
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        }, 3000);
     }
 }

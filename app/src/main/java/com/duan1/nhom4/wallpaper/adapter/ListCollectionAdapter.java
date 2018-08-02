@@ -11,11 +11,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.duan1.nhom4.wallpaper.R;
-import com.duan1.nhom4.wallpaper.model.CollectionsItem;
-import com.duan1.nhom4.wallpaper.model.ItemClickCollection;
 import com.duan1.nhom4.wallpaper.model.ListCollectionItem;
 import com.duan1.nhom4.wallpaper.uis.activities.CollectionDetailActivity;
-import com.duan1.nhom4.wallpaper.uis.activities.DownloadDetailActivity;
 
 import java.util.List;
 
@@ -65,25 +62,3 @@ public class ListCollectionAdapter extends RecyclerView.Adapter<ListCollectionAd
         }
     }
 }
-
-
-//class ItemCollectionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-//    ImageView imgItemCollection;
-//    private ItemClickCollection clickCollection;
-//
-//    public ItemCollectionViewHolder(View itemView) {
-//        super(itemView);
-//        imgItemCollection = itemView.findViewById(R.id.imgItemCollection);
-//        itemView.setOnClickListener(this);
-//
-//    }
-//
-//    public void setImgItemCollection(ItemClickCollection clickCollection){
-//        this.clickCollection = clickCollection;
-//    }
-//
-//    @Override
-//    public void onClick(View v) {
-//        clickCollection.onClick(v,getAdapterPosition(),false);
-//    }
-//}

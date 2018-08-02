@@ -51,13 +51,12 @@ public class DownloadActivity extends BaseActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                onBackPressed();
             }
         });
 
 
-        RecyclerView.LayoutManager layoutManager1 = new GridLayoutManager(this,3);
+        RecyclerView.LayoutManager layoutManager1 = new GridLayoutManager(this, 3);
         recyclerPlace.setLayoutManager(layoutManager1);
         recyclerPlace.setAdapter(adapter);
         fakeData();

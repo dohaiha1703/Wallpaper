@@ -16,19 +16,18 @@ public class CollectionDetailActivity extends BaseActivity {
 
     @Override
     public int injectLayout() {
-        return R.layout.activity_collection_detail;
+        return R.layout.activity_subject_detail;
     }
 
     @Override
     public void intialView() {
 
-        toolbar = findViewById(R.id.toolbarCollecDetail);
+        toolbar = findViewById(R.id.toolbarSubjectDetail);
 
     }
 
     @Override
     public void intialVariables() {
-        toolbar.setTitle("chi tiet");
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_arrow_left);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,26 +1,43 @@
 package com.duan1.nhom4.wallpaper.adapter;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.model.HomeItem;
+import com.duan1.nhom4.wallpaper.rest.GetAllImagRestClient;
+import com.duan1.nhom4.wallpaper.uis.activities.HomeActivity;
 import com.duan1.nhom4.wallpaper.uis.activities.HomeDetailActivity;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclerviewAdapter.ViewHolder> {
 
     private List<HomeItem> homeItems;
     private Context mContext;
     boolean check = true;
+
 
     public HomeRecyclerviewAdapter(List<HomeItem> homeItems, Context mContext) {
         this.homeItems = homeItems;
@@ -40,13 +57,16 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
-        HomeItem homeItem = homeItems.get(position);
+        final HomeItem homeItem = homeItems.get(position);
         holder.tvItemHome.setText(homeItem.getTv());
+
+        Glide.with(mContext).load(homeItem.getImg()).into(holder.imgItemHome);
 
         holder.imgItemHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, HomeDetailActivity.class);
+                intent.putExtra("img_url", homeItem.getImg());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
@@ -55,12 +75,11 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
         holder.imgItemHomeFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (check){
+                if (check) {
                     holder.imgItemHomeFavorite.setImageResource(R.drawable.ic_action_star_10);
 
                     check = false;
-                }
-                else {
+                } else {
                     holder.imgItemHomeFavorite.setImageResource(R.drawable.ic_action_star_0);
                     check = true;
                 }
@@ -68,6 +87,9 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
         });
 
     }
+
+
+
 
     @Override
     public int getItemCount() {

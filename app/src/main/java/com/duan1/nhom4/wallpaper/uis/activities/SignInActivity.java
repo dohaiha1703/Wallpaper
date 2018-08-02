@@ -26,6 +26,7 @@ public class SignInActivity extends BaseActivity {
     EditText username;
     EditText password;
     CheckBox checkBox;
+
     @Override
     public int injectLayout() {
         return R.layout.activity_sign_in;
@@ -47,7 +48,7 @@ public class SignInActivity extends BaseActivity {
         eventClick();
     }
 
-    public void eventClick(){
+    public void eventClick() {
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,12 +62,12 @@ public class SignInActivity extends BaseActivity {
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(username.getText().toString()) && TextUtils.isEmpty(password.getText().toString())){
-                    Toast.makeText(getApplicationContext(),"khong the login",Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(username.getText().toString()) && TextUtils.isEmpty(password.getText().toString())) {
+                    Toast.makeText(getApplicationContext(), "khong the login", Toast.LENGTH_SHORT).show();
                 } else {
 
 
-                    setBtnLogIn(username.getText().toString(),password.getText().toString());
+                    setBtnLogIn(username.getText().toString(), password.getText().toString());
                     savingPreferences();
                 }
 
@@ -76,9 +77,10 @@ public class SignInActivity extends BaseActivity {
         });
 
     }
+
     //PHong lam API
-    private void setBtnLogIn(final String user, final String password){
-        Call<JsonElement> callNonce = RestClient.getApiInterface().callGetNonceLogin("auth","generate_auth_cookie");
+    private void setBtnLogIn(final String user, final String password) {
+        Call<JsonElement> callNonce = RestClient.getApiInterface().callGetNonceLogin("auth", "generate_auth_cookie");
         callNonce.enqueue(new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
@@ -86,16 +88,18 @@ public class SignInActivity extends BaseActivity {
                 JsonObject jsonObject = jsonElement.getAsJsonObject();
                 String nonce = jsonObject.get("nonce").getAsString();
 //                Log.e("ok",nonce);
-                Call<JsonElement> callLogin = RestClient.getApiLogin().login(nonce,user,password,"cool");
+                Call<JsonElement> callLogin = RestClient.getApiLogin().login(nonce, user, password, "cool");
                 callLogin.enqueue(new Callback<JsonElement>() {
                     @Override
                     public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
                         JsonElement element = response.body();
                         JsonObject object = element.getAsJsonObject();
                         String status = object.get("status").getAsString();
-                        if (status.equals("ok")){
-                            Toast.makeText(getApplicationContext(),"Thanh cong",Toast.LENGTH_SHORT).show();
+                        if (status.equals("ok")) {
+                            Toast.makeText(getApplicationContext(), "Thanh cong", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(SignInActivity.this, HomeActivity.class));
+                        }else {
+                            Toast.makeText(SignInActivity.this, "Sai ten dang nhap hoac mat khau", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -114,28 +118,29 @@ public class SignInActivity extends BaseActivity {
     }
 
     //nut Remember
-    private void savingPreferences(){
+    private void savingPreferences() {
 
-        SharedPreferences sharedPreferences = getSharedPreferences("phongdeptrai",MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("phongdeptrai", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         String user = username.getText().toString();
         String pass = password.getText().toString();
         boolean chk = checkBox.isChecked();
-        if (!chk){
+        if (!chk) {
             editor.clear();
         } else {
             editor.putString("username", user);
-            editor.putString("password",pass);
-            editor.putBoolean("savestatus",chk);
+            editor.putString("password", pass);
+            editor.putBoolean("savestatus", chk);
         }
         editor.commit();
     }
-    private void restoringPreferences(){
-        SharedPreferences preferences = getSharedPreferences("phongdeptrai",MODE_PRIVATE);
-        boolean chk = preferences.getBoolean("savestatus",false);
-        if (chk){
-            String user = preferences.getString("username","");
-            String pass = preferences.getString("password","");
+
+    private void restoringPreferences() {
+        SharedPreferences preferences = getSharedPreferences("phongdeptrai", MODE_PRIVATE);
+        boolean chk = preferences.getBoolean("savestatus", false);
+        if (chk) {
+            String user = preferences.getString("username", "");
+            String pass = preferences.getString("password", "");
             username.setText(user);
             password.setText(pass);
         }

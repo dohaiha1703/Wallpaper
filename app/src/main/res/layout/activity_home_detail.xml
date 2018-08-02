@@ -7,10 +7,10 @@
     tools:context=".uis.activities.HomeDetailActivity">
 
     <ImageView
+        android:id="@+id/imgHomeDetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:id="@+id/imgHomeDetail"
         android:src="@drawable/background" />
 
     <android.support.v7.widget.Toolbar
@@ -44,6 +44,7 @@
 
             <android.support.v7.widget.AppCompatButton
                 style="@style/btnDownload"
+                android:onClick="downLoadImg"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
@@ -53,19 +54,19 @@
 
 
             <ImageView
+                android:id="@+id/imgHomeDetailFavorite"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.3"
-                android:id="@+id/imgHomeDetailFavorite"
                 android:layout_marginHorizontal="5dp"
+                android:layout_weight="1.3"
                 android:src="@drawable/ic_star_border_black" />
 
 
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.3"
                 android:layout_marginHorizontal="5dp"
+                android:layout_weight="1.3"
                 android:src="@drawable/ic_action_share" />
 
 
