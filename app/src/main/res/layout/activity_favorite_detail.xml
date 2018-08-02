@@ -47,7 +47,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="6"
-                android:text="Áp Dụng"
+                android:text="Download"
                 android:textAllCaps="false"
                 android:textSize="25dp" />
 

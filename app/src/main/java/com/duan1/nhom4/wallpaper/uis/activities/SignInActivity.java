@@ -35,6 +35,7 @@ public class SignInActivity extends BaseActivity {
     public void intialView() {
         btnSignUp = findViewById(R.id.btnSignUp);
         btnLogIn = findViewById(R.id.btnLogin);
+
         username = findViewById(R.id.edUsername);
         password = findViewById(R.id.edPassword);
         checkBox = findViewById(R.id.cbCheckRemember);
@@ -61,11 +62,10 @@ public class SignInActivity extends BaseActivity {
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(username.getText().toString()) && TextUtils.isEmpty(password.getText().toString())){
+                if (TextUtils.isEmpty(username.getText().toString())
+                        && TextUtils.isEmpty(password.getText().toString())){
                     Toast.makeText(getApplicationContext(),"khong the login",Toast.LENGTH_SHORT).show();
                 } else {
-
-
                     setBtnLogIn(username.getText().toString(),password.getText().toString());
                     savingPreferences();
                 }
@@ -78,7 +78,10 @@ public class SignInActivity extends BaseActivity {
     }
     //PHong lam API
     private void setBtnLogIn(final String user, final String password){
-        Call<JsonElement> callNonce = RestClient.getApiInterface().callGetNonceLogin("auth","generate_auth_cookie");
+        Call<JsonElement> callNonce = RestClient
+                .getApiInterface()
+                .callGetNonceLogin("auth"
+                        ,"generate_auth_cookie");
         callNonce.enqueue(new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
@@ -130,6 +133,7 @@ public class SignInActivity extends BaseActivity {
         }
         editor.commit();
     }
+
     private void restoringPreferences(){
         SharedPreferences preferences = getSharedPreferences("phongdeptrai",MODE_PRIVATE);
         boolean chk = preferences.getBoolean("savestatus",false);

@@ -3,14 +3,11 @@ package com.duan1.nhom4.wallpaper.rest;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RestClient {
-
+public class RestClientSignUp {
     public static final String BASE_API = "http://nhom4.dotplays.com/";
     private static Retrofit retrofit;
-    public static final String LOGIN_API = "http://nhom4.dotplays.com/";
-    private static Retrofit retrofitLogin;
-
-
+    private static final String SIGN_API = "http://nhom4.dotplays.com";
+    private static Retrofit retrofitSignUp;
 
     public static Retrofit getRestClient() {
         if (retrofit == null) {
@@ -22,23 +19,21 @@ public class RestClient {
         return retrofit;
     }
 
-    public static ApiInterface getApiInterface() {
-        return getRestClient().create(ApiInterface.class);
+    public static APISignUp getApiSignUp() {
+        return getRestClient().create(APISignUp.class);
     }
+    //Sign Up
 
-    //Login
-    public static Retrofit getLogin() {
-        if (retrofitLogin == null) {
-            retrofitLogin = new Retrofit.Builder()
-                    .baseUrl(LOGIN_API)
+    public static Retrofit getSignApi() {
+        if (retrofitSignUp == null){
+            retrofitSignUp = new Retrofit.Builder()
+                    .baseUrl(SIGN_API)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
-        return retrofitLogin;
+        return retrofitSignUp;
     }
-
-    public static ApiInterface getApiLogin() {
-        return getLogin().create(ApiInterface.class);
+    public static APISignUp getApiSign(){
+        return getSignApi().create(APISignUp.class);
     }
-
 }

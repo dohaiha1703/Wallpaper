@@ -18,4 +18,5 @@ public interface ApiInterface {
                             @Query("username")String username,
                             @Query("password")String password,
                             @Query("insecure")String insecure);
+
 }
