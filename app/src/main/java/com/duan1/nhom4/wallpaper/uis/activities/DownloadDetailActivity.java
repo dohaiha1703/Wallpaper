@@ -2,8 +2,10 @@ package com.duan1.nhom4.wallpaper.uis.activities;
 
 import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
@@ -11,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.duan1.nhom4.wallpaper.R;
@@ -48,12 +51,7 @@ public class DownloadDetailActivity extends BaseActivity {
             @SuppressLint("ResourceType")
             @Override
             public void onClick(View v) {
-                WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
-                try {
-                    wallpaperManager.setResource(R.drawable.background);
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
+                showDialogDownload();
             }
         });
     }
@@ -81,5 +79,32 @@ public class DownloadDetailActivity extends BaseActivity {
                 .asBitmap()
                 .load(imageUrl)
                 .into(image);
+    }
+    public void showDialogDownload(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Bạn có muốn dùng ảnh này làm ảnh nền không");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+//                Toast.makeText(DownloadDetailActivity.this, "Không thoát được", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @SuppressLint("ResourceType")
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
+                try {
+                    wallpaperManager.setResource(R.drawable.background);
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+                Toast.makeText(DownloadDetailActivity.this, "Đã dùng hình nền", Toast.LENGTH_SHORT).show();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }
