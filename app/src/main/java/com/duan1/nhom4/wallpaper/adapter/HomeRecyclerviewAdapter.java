@@ -72,20 +72,6 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
             }
         });
 
-        holder.imgItemHomeFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (check) {
-                    holder.imgItemHomeFavorite.setImageResource(R.drawable.ic_action_star_10);
-
-                    check = false;
-                } else {
-                    holder.imgItemHomeFavorite.setImageResource(R.drawable.ic_action_star_0);
-                    check = true;
-                }
-            }
-        });
-
     }
 
 
@@ -98,13 +84,12 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView imgItemHome, imgItemHomeFavorite;
+        public ImageView imgItemHome;
         public TextView tvItemHome;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            imgItemHomeFavorite = itemView.findViewById(R.id.imgFavoriteItemHome);
             imgItemHome = itemView.findViewById(R.id.imgItemHome);
             tvItemHome = itemView.findViewById(R.id.tvItemHome);
         }

@@ -3,6 +3,7 @@ package com.duan1.nhom4.wallpaper.uis.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -23,12 +24,12 @@ import retrofit2.Response;
 
 public class SignUpActivity extends BaseActivity {
 
-    AppCompatButton imgBack;
     private Button btnSignup;
     private EditText edtUserNameSign;
     private EditText edtEmailSign;
     private EditText edtDisplaySign;
     private EditText edtPasswordSign;
+    private Toolbar toolbar;
 
     @Override
     public int injectLayout() {
@@ -37,29 +38,28 @@ public class SignUpActivity extends BaseActivity {
 
     @Override
     public void intialView() {
-        imgBack = findViewById(R.id.btnBack);
         btnSignup =  findViewById(R.id.btnSignup);
         edtUserNameSign = (EditText) findViewById(R.id.edtUserNameSign);
         edtEmailSign = (EditText) findViewById(R.id.edtEmailSign);
         edtPasswordSign = (EditText) findViewById(R.id.edtPasswordSign);
         edtDisplaySign = findViewById(R.id.edtUserNameSign);
-
+        toolbar = findViewById(R.id.toolbarSignUp);
 
     }
 
     @Override
     public void intialVariables() {
+        toolbar.setNavigationIcon(R.drawable.ic_keyboard_arrow_left_white);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         eventClick();
     }
 
     public void eventClick() {
-        imgBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
-                startActivity(intent);
-            }
-        });
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
