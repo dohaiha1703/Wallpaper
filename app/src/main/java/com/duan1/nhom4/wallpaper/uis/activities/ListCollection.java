@@ -45,7 +45,7 @@ public class ListCollection extends BaseActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                finish();
                 //quay lại trang vừa ấn
             }
         });

@@ -98,18 +98,15 @@ public class HomeActivity extends BaseActivity {
 
                 switch (item.getItemId()) {
                     case R.id.collection:
-                        Toast.makeText(mContext, "collection", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(HomeActivity.this, CollectionActivity.class));
                         break;
 
                     case R.id.download:
-                        Toast.makeText(mContext, "download", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(HomeActivity.this, DownloadActivity.class));
                         break;
 
 
                     case R.id.favorite:
-                        Toast.makeText(mContext, "favorite", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(HomeActivity.this, FavoriteActivity.class));
                         break;
 
@@ -119,7 +116,6 @@ public class HomeActivity extends BaseActivity {
                         break;
 
                     case R.id.sign_out:
-                        Toast.makeText(mContext, "exit", Toast.LENGTH_SHORT).show();
                         finish();
                         break;
                 }
@@ -137,7 +133,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void fakeData() {
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 30; i++) {
             HomeItem item = new HomeItem(listLink.get(i), listNameImage.get(i));
             items.add(item);
         }

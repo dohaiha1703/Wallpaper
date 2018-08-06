@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".uis.activities.DownloadDetailActivity"
-    >
+    tools:context=".uis.activities.FavoriteDetailActivity">
 
     <ImageView
         android:id="@+id/imgDownloadDetail"
@@ -45,34 +43,34 @@
 
 
             <android.support.v7.widget.AppCompatButton
-                style="@style/btnSignIn"
-                android:id="@+id/btnDownloadAD"
+                style="@style/btnApply"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="6"
-                android:text="Áp Dụng"
+                android:layout_weight="5"
+                android:text="Apply"
                 android:textAllCaps="false"
                 android:textSize="25dp" />
 
-
             <ImageView
+                android:id="@+id/imgDownloadDetailDelete"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.3"
                 android:layout_marginHorizontal="5dp"
-                android:src="@drawable/ic_star_border_black" />
-
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
                 android:layout_weight="1.3"
-                android:layout_marginHorizontal="5dp"
-                android:src="@drawable/ic_action_share" />
+                android:src="@drawable/ic_delete" />
 
+
+            <!--<ImageView-->
+                <!--android:id="@+id/imgFavoriteDetailSetFavorite"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginHorizontal="5dp"-->
+                <!--android:layout_weight="1.3"-->
+                <!--android:src="@drawable/ic_action_star_10" />-->
 
         </LinearLayout>
 
 
     </FrameLayout>
+
 </FrameLayout>

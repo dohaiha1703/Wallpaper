@@ -8,18 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.duan1.nhom4.wallpaper.R;
-import com.duan1.nhom4.wallpaper.model.RecycelViewDowload;
+import com.duan1.nhom4.wallpaper.model.DownloadModel;
 import com.duan1.nhom4.wallpaper.uis.activities.DownloadDetailActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class DowloadRecycelAdapter extends RecyclerView.Adapter<DowloadRecycelAdapter.ViewHoder> {
-    private List<RecycelViewDowload> dowloadList;
+    private List<DownloadModel> dowloadList;
     private Context mContext;
-    public DowloadRecycelAdapter(Context context, List<RecycelViewDowload> dowloadList){
+    public DowloadRecycelAdapter(Context context, List<DownloadModel> dowloadList){
         this.dowloadList = dowloadList;
         this.mContext = context;
     }
@@ -33,12 +34,17 @@ public class DowloadRecycelAdapter extends RecyclerView.Adapter<DowloadRecycelAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHoder holder, final int position) {
-        RecycelViewDowload recycelViewDowload = dowloadList.get(position);
+        final DownloadModel model = dowloadList.get(position);
 
-        holder.imgImage.setOnClickListener(new View.OnClickListener() {
+        Picasso.with(mContext).load(model.getPlaceImage()).into(holder.imgDownload);
+
+
+        holder.imgDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, DownloadDetailActivity.class);
+                intent.putExtra("img_url", model.getPlaceImage());
+                intent.putExtra("img_pos", position);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
@@ -51,10 +57,10 @@ public class DowloadRecycelAdapter extends RecyclerView.Adapter<DowloadRecycelAd
     }
 
     public class ViewHoder extends RecyclerView.ViewHolder {
-        private ImageView imgImage;
+        private ImageView imgDownload;
         public ViewHoder(View itemView) {
             super(itemView);
-            imgImage = itemView.findViewById(R.id.imgBackground);
+            imgDownload = itemView.findViewById(R.id.imgBackground);
         }
     }
 }

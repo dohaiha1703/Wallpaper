@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".uis.activities.FavoriteDetailActivity">
+
     <ImageView
         android:id="@+id/imgFavoriteDetail"
         android:layout_width="match_parent"
@@ -42,34 +43,34 @@
 
 
             <android.support.v7.widget.AppCompatButton
-                style="@style/btnSignIn"
-                android:id="@+id/btnFavoriteDetail"
+                style="@style/btnApply"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="6"
-                android:text="Download"
+                android:layout_weight="5"
+                android:text="Apply"
                 android:textAllCaps="false"
                 android:textSize="25dp" />
 
+            <!--<ImageView-->
+                <!--android:id="@+id/imgFavoriteDetailDownload"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginHorizontal="5dp"-->
+                <!--android:layout_weight="1.3"-->
+                <!--android:src="@drawable/ic_action_download" />-->
+
 
             <ImageView
+                android:id="@+id/imgFavoriteDetailSetFavorite"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.3"
                 android:layout_marginHorizontal="5dp"
-                android:src="@drawable/ic_star_border_black" />
-
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
                 android:layout_weight="1.3"
-                android:layout_marginHorizontal="5dp"
-                android:src="@drawable/ic_action_share" />
-
+                android:src="@drawable/ic_action_star_10" />
 
         </LinearLayout>
 
 
     </FrameLayout>
+
 </FrameLayout>

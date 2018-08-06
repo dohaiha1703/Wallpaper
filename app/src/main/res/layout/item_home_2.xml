@@ -44,8 +44,9 @@
                 android:id="@+id/tvItemHome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="7"
+                android:layout_weight="9"
                 android:text="anh 1"
+                android:maxLines="1"
                 android:textColor="#000"
                 android:textSize="18sp" />
         </LinearLayout>

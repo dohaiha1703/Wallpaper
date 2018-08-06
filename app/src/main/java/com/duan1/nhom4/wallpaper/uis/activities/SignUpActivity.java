@@ -18,6 +18,8 @@ import com.duan1.nhom4.wallpaper.R;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -53,7 +55,7 @@ public class SignUpActivity extends BaseActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                finish();
             }
         });
         eventClick();
@@ -65,13 +67,12 @@ public class SignUpActivity extends BaseActivity {
             public void onClick(View v) {
                 if (TextUtils.isEmpty(edtUserNameSign.getText().toString())
                         && TextUtils.isEmpty(edtPasswordSign.getText().toString())) {
-                    Toast.makeText(getApplicationContext(), "khong the Sign Up", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Empty field is invalid", Toast.LENGTH_SHORT).show();
                 } else {
                     setBtnBack(edtUserNameSign.getText().toString(),
                             edtEmailSign.getText().toString(),
                             edtDisplaySign.getText().toString(),
                             edtPasswordSign.getText().toString());
-                    Toast.makeText(SignUpActivity.this, "test", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -93,13 +94,20 @@ public class SignUpActivity extends BaseActivity {
                 callSignUp.enqueue(new Callback<JsonElement>() {
                     @Override
                     public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                        JsonElement element = response.body();
-                        JsonObject object = element.getAsJsonObject();
-                        String status = object.get("status").getAsString();
-                        if (status.equals("ok")) {
-                            Toast.makeText(getApplicationContext(), "Thanh cong", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
-                        }
+                       try{
+                           JsonElement element = response.body();
+                           JsonObject object = element.getAsJsonObject();
+                           String status = object.get("status").getAsString();
+                           if (status.equals("ok")) {
+                               Toast.makeText(getApplicationContext(), "Sign up Succeed", Toast.LENGTH_SHORT).show();
+                               startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
+                           }
+                           else {
+                               Toast.makeText(SignUpActivity.this, "Invalid data", Toast.LENGTH_SHORT).show();
+                           }
+                       }catch (NullPointerException e){
+                           Toast.makeText(SignUpActivity.this, "Invalid data(User name or Email)", Toast.LENGTH_SHORT).show();
+                       }
                     }
 
                     @Override

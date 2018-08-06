@@ -60,7 +60,10 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
         final HomeItem homeItem = homeItems.get(position);
         holder.tvItemHome.setText(homeItem.getTv());
 
-        Glide.with(mContext).load(homeItem.getImg()).into(holder.imgItemHome);
+        Glide
+                .with(mContext)
+                .load(homeItem.getImg())
+                .into(holder.imgItemHome);
 
         holder.imgItemHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +84,8 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
     public int getItemCount() {
         return homeItems.size();
     }
+
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
