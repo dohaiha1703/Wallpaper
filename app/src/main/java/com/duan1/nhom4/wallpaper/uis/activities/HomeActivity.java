@@ -1,7 +1,6 @@
 package com.duan1.nhom4.wallpaper.uis.activities;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -12,16 +11,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.duan1.nhom4.wallpaper.adapter.HomeRecyclerviewAdapter;
 import com.duan1.nhom4.wallpaper.model.HomeItem;
-import com.duan1.nhom4.wallpaper.rest.GetAllImagRestClient;
-import com.duan1.nhom4.wallpaper.rest.RestClient;
+import com.duan1.nhom4.wallpaper.rest.GetAllImageRestClient;
 import com.duan1.nhom4.wallpaper.uis.BaseActivity;
 import com.duan1.nhom4.wallpaper.R;
 import com.google.gson.JsonArray;
@@ -48,7 +43,7 @@ public class HomeActivity extends BaseActivity {
     private List<String> listLink;
     private List<String> listNameImage;
 
-    ProgressDialog dialog;
+    private ProgressDialog dialog;
 
 
     @Override
@@ -145,7 +140,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     public void getLinkAllMedia() {
-        Call<JsonElement> call = GetAllImagRestClient.getApiInterface().getAllMedia();
+        Call<JsonElement> call = GetAllImageRestClient.getApiInterface().getAllMedia();
 
         call.enqueue(new Callback<JsonElement>() {
             @Override
@@ -199,6 +194,6 @@ public class HomeActivity extends BaseActivity {
             public void run() {
                 dialog.dismiss();
             }
-        }, 3000);
+        }, 2000);
     }
 }

@@ -3,7 +3,7 @@ package com.duan1.nhom4.wallpaper.rest;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class GetAllImagRestClient {
+public class GetAllImageRestClient {
 
     public static final String BASE_API = "http://nhom4.dotplays.com/wp-json/wp/v2/";
     private static Retrofit retrofit;

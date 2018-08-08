@@ -1,5 +1,6 @@
 package com.duan1.nhom4.wallpaper.uis.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.AppCompatButton;
@@ -16,6 +17,9 @@ import com.duan1.nhom4.wallpaper.uis.BaseActivity;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,6 +30,7 @@ public class SignInActivity extends BaseActivity {
     EditText username;
     EditText password;
     CheckBox checkBox;
+    private ProgressDialog dialog;
 
     @Override
     public int injectLayout() {
@@ -39,6 +44,7 @@ public class SignInActivity extends BaseActivity {
         username = findViewById(R.id.edUsername);
         password = findViewById(R.id.edPassword);
         checkBox = findViewById(R.id.cbCheckRemember);
+        dialog = new ProgressDialog(SignInActivity.this);
 
     }
 
@@ -46,6 +52,33 @@ public class SignInActivity extends BaseActivity {
     public void intialVariables() {
         restoringPreferences();
         eventClick();
+    }
+
+    public void showSpinerProgress() {
+
+        //lap thong tin
+//        dialog.setTitle("open");
+        dialog.setMessage("Sign in");
+//
+//        dialog.setButton(ProgressDialog.BUTTON_POSITIVE, "YES", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//            }
+//        });
+
+        //thiet lap k the huy - co the huy
+        dialog.setCancelable(false);
+
+        //show dialog
+        dialog.show();
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        }, 3000);
     }
 
     public void eventClick() {
@@ -63,12 +96,12 @@ public class SignInActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(username.getText().toString()) && TextUtils.isEmpty(password.getText().toString())) {
-                    Toast.makeText(getApplicationContext(), "khong the login", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Empty field is invalid", Toast.LENGTH_SHORT).show();
                 } else {
-
 
                     setBtnLogIn(username.getText().toString(), password.getText().toString());
                     savingPreferences();
+                    showSpinerProgress();
                 }
 
 //                setBtnLogIn(username.getText().toString(),password.getText().toString());
@@ -96,10 +129,11 @@ public class SignInActivity extends BaseActivity {
                         JsonObject object = element.getAsJsonObject();
                         String status = object.get("status").getAsString();
                         if (status.equals("ok")) {
-                            Toast.makeText(getApplicationContext(), "Thanh cong", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
                             startActivity(new Intent(SignInActivity.this, HomeActivity.class));
-                        }else {
-                            Toast.makeText(SignInActivity.this, "Sai ten dang nhap hoac mat khau", Toast.LENGTH_SHORT).show();
+                        } else {
+                            dialog.dismiss();
+                            Toast.makeText(SignInActivity.this, "Wrong User name or Password", Toast.LENGTH_SHORT).show();
                         }
                     }
 

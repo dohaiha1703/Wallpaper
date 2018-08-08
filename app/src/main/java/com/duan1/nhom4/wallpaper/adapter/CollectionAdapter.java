@@ -12,30 +12,35 @@ import android.widget.TextView;
 
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.model.CollectionsItem;
+import com.duan1.nhom4.wallpaper.uis.activities.CollectionDetailActivity;
 import com.duan1.nhom4.wallpaper.uis.activities.ListCollection;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.ViewHolder> {
 
     private List<CollectionsItem> items;
+    private Context mContext;
 
-    public CollectionAdapter( List<CollectionsItem> items) {
+    public CollectionAdapter(List<CollectionsItem> items, Context mContext) {
         this.items = items;
+        this.mContext = mContext;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_collection,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_collection, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-       CollectionsItem collectionsItem = items.get(position);
-       holder.name01.setText(collectionsItem.getName());
-       holder.note01.setText(collectionsItem.getNote());
+        CollectionsItem collectionsItem = items.get(position);
+        holder.name01.setText(collectionsItem.getName());
+        holder.note01.setText(collectionsItem.getNote());
+        holder.imageView01.setImageResource(collectionsItem.getImg());
     }
 
     @Override
@@ -43,22 +48,20 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
         return items.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView imageView01,imgIcon01;
-        TextView name01,note01;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView imageView01;
+        TextView name01, note01;
+
         public ViewHolder(View itemView) {
             super(itemView);
             imageView01 = itemView.findViewById(R.id.imgV01);
-            imgIcon01 = itemView.findViewById(R.id.imgIcon01);
             name01 = itemView.findViewById(R.id.tvName01);
             note01 = itemView.findViewById(R.id.tvNote01);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context, ListCollection.class);
-                    context.startActivity(intent);
+                    mContext.startActivity(new Intent(mContext, ListCollection.class));
                 }
             });
         }

@@ -37,7 +37,7 @@ public class CollectionActivity extends BaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         items = new ArrayList<>();
-        adapter = new CollectionAdapter(items);
+        adapter = new CollectionAdapter(items, CollectionActivity.this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -57,10 +57,37 @@ public class CollectionActivity extends BaseActivity {
     }
 
     private void fakeData() {
-        for (int i = 0; i < 40; i++) {
-            CollectionsItem item = new CollectionsItem("name", "","note");
-            items.add(item);
-        }
+        CollectionsItem item1 = new CollectionsItem("Nature",
+                R.drawable.nature_background, "Forest, Coast, Lake, ...");
+
+        CollectionsItem item2 = new CollectionsItem("Movies",
+                R.drawable.movies_background, "Drama, Action, Science, ...");
+
+        CollectionsItem item3 = new CollectionsItem("Creative",
+                R.drawable.creative_background, "More than you expect");
+
+        CollectionsItem item4 = new CollectionsItem("Lifestyle",
+                R.drawable.lifestyle_background, "Lifestyle of everywhere on the world");
+
+        CollectionsItem item5 = new CollectionsItem("Universe",
+                R.drawable.universe_background, "Galaxy, Stars, Space ...");
+
+        CollectionsItem item6 = new CollectionsItem("Art",
+                R.drawable.art_background, "Beautiful and abstract");
+
+        CollectionsItem item7 = new CollectionsItem("Scenery",
+                R.drawable.scenery_background, "Where spectacular");
+
+        CollectionsItem item8 = new CollectionsItem("Others",
+                R.drawable.others_background, "Others topics");
+        items.add(item1);
+        items.add(item2);
+        items.add(item3);
+        items.add(item4);
+        items.add(item5);
+        items.add(item6);
+        items.add(item7);
+        items.add(item8);
         adapter.notifyDataSetChanged();
     }
 }
