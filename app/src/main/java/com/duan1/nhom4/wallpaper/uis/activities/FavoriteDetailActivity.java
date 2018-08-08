@@ -67,6 +67,7 @@ public class FavoriteDetailActivity extends BaseActivity {
                     dbManager.deleteFavoriteItem(favoriteModels.get(pos));
                     imgSetFavorite.setVisibility(View.INVISIBLE);
                     check = false;
+                    finish();
                     startActivity(new Intent(FavoriteDetailActivity.this, FavoriteActivity.class));
                 }
 //                else if (check == false) {

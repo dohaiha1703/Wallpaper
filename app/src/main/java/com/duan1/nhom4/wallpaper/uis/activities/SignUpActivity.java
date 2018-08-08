@@ -1,5 +1,6 @@
 package com.duan1.nhom4.wallpaper.uis.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.AppCompatButton;
@@ -19,6 +20,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,6 +35,7 @@ public class SignUpActivity extends BaseActivity {
     private EditText edtDisplaySign;
     private EditText edtPasswordSign;
     private Toolbar toolbar;
+    private ProgressDialog dialog;
 
     @Override
     public int injectLayout() {
@@ -46,6 +50,7 @@ public class SignUpActivity extends BaseActivity {
         edtPasswordSign = (EditText) findViewById(R.id.edtPasswordSign);
         edtDisplaySign = findViewById(R.id.edtUserNameSign);
         toolbar = findViewById(R.id.toolbarSignUp);
+        dialog = new ProgressDialog(SignUpActivity.this);
 
     }
 
@@ -61,6 +66,34 @@ public class SignUpActivity extends BaseActivity {
         eventClick();
     }
 
+
+    public void showSpinerProgress() {
+
+        //lap thong tin
+//        dialog.setTitle("open");
+        dialog.setMessage("Sign up");
+//
+//        dialog.setButton(ProgressDialog.BUTTON_POSITIVE, "YES", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//            }
+//        });
+
+        //thiet lap k the huy - co the huy
+        dialog.setCancelable(false);
+
+        //show dialog
+        dialog.show();
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        }, 30000000);
+    }
+
     public void eventClick() {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +106,7 @@ public class SignUpActivity extends BaseActivity {
                             edtEmailSign.getText().toString(),
                             edtDisplaySign.getText().toString(),
                             edtPasswordSign.getText().toString());
+                    showSpinerProgress();
                 }
             }
         });
@@ -101,9 +135,11 @@ public class SignUpActivity extends BaseActivity {
                            if (status.equals("ok")) {
                                Toast.makeText(getApplicationContext(), "Sign up Succeed", Toast.LENGTH_SHORT).show();
                                startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
+                               dialog.dismiss();
                            }
                            else {
                                Toast.makeText(SignUpActivity.this, "Invalid data", Toast.LENGTH_SHORT).show();
+                               dialog.dismiss();
                            }
                        }catch (NullPointerException e){
                            Toast.makeText(SignUpActivity.this, "Invalid data(User name or Email)", Toast.LENGTH_SHORT).show();

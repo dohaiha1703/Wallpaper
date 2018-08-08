@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".uis.activities.SubjectDetailActivity">
+    android:layout_height="match_parent">
 
     <ImageView
         android:layout_width="match_parent"
@@ -47,7 +46,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:text="Download"
+                android:text="Apply"
                 android:textAllCaps="false"
                 android:textSize="25dp" />
 
@@ -56,17 +55,18 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.3"
-                android:id="@+id/imgHomeDetailFavorite"
+                android:id="@+id/imgCollectionFavorite"
                 android:layout_marginHorizontal="5dp"
-                android:src="@drawable/ic_star_border_black" />
+                android:src="@drawable/ic_action_star_0" />
 
 
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.3"
+                android:id="@+id/btnCollectionDownload"
                 android:layout_marginHorizontal="5dp"
-                android:src="@drawable/ic_action_share" />
+                android:src="@drawable/ic_action_download" />
 
 
         </LinearLayout>

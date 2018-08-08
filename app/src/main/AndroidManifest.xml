@@ -26,8 +26,6 @@
         <activity android:name=".uis.activities.HomeActivity" />
         <activity android:name=".uis.activities.HomeDetailActivity" />
         <activity android:name=".uis.activities.CollectionActivity" />
-        <activity android:name=".uis.activities.SubjectActivity" />
-        <activity android:name=".uis.activities.SubjectDetailActivity" />
         <activity android:name=".uis.activities.FavoriteActivity" />
         <activity android:name=".uis.activities.FavoriteDetailActivity" />
         <activity android:name=".uis.activities.DownloadActivity" />

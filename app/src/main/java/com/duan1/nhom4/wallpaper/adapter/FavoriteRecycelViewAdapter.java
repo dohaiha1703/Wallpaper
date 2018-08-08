@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.model.FavoriteModel;
+import com.duan1.nhom4.wallpaper.uis.activities.CollectionActivity;
 import com.duan1.nhom4.wallpaper.uis.activities.DownloadDetailActivity;
+import com.duan1.nhom4.wallpaper.uis.activities.FavoriteActivity;
 import com.duan1.nhom4.wallpaper.uis.activities.FavoriteDetailActivity;
 import com.squareup.picasso.Picasso;
 
@@ -47,6 +49,7 @@ public class FavoriteRecycelViewAdapter extends RecyclerView.Adapter<FavoriteRec
                 .with(mContext)
                 .load(model.getFavoriteImage())
                 .into(holder.imgItemFavorite);
+
 
 
         holder.imgItemFavorite.setOnClickListener(new View.OnClickListener() {

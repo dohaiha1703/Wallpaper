@@ -6,12 +6,16 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.uis.BaseActivity;
+import com.squareup.picasso.Picasso;
 
 public class CollectionDetailActivity extends BaseActivity {
     Toolbar toolbar;
+    private String imgUrl;
+    private ImageView imgSubjectDetail;
 
 
     @Override
@@ -23,7 +27,8 @@ public class CollectionDetailActivity extends BaseActivity {
     public void intialView() {
 
         toolbar = findViewById(R.id.toolbarSubjectDetail);
-
+        imgUrl = null;
+        imgSubjectDetail = findViewById(R.id.imgSubjectDetail);
     }
 
     @Override
@@ -36,5 +41,15 @@ public class CollectionDetailActivity extends BaseActivity {
                 //quay lại trang vừa ấn
             }
         });
+
+        getIncomingData();
+    }
+
+    private void getIncomingData() {
+        if (getIntent().hasExtra("img_url")) {
+            imgUrl = getIntent().getStringExtra("img_url");
+
+            Picasso.with(CollectionDetailActivity.this).load(imgUrl).into(imgSubjectDetail);
+        }
     }
 }

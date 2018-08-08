@@ -36,11 +36,47 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        CollectionsItem collectionsItem = items.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        final CollectionsItem collectionsItem = items.get(position);
         holder.name01.setText(collectionsItem.getName());
         holder.note01.setText(collectionsItem.getNote());
         holder.imageView01.setImageResource(collectionsItem.getImg());
+
+        holder.imageView01.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ListCollection.class);
+                intent.putExtra("img_name", collectionsItem.getName());
+
+                if (position == 0) {
+                    intent.putExtra("collection_id", "527");
+                    intent.putExtra("collection_name", "Nature");
+                } else if (position == 1) {
+                    intent.putExtra("collection_id", "544");
+                    intent.putExtra("collection_name", "Movies");
+                } else if (position == 2) {
+                    intent.putExtra("collection_id", "564");
+                    intent.putExtra("collection_name", "Creative");
+                } else if (position == 3) {
+                    intent.putExtra("collection_id", "582");
+                    intent.putExtra("collection_name", "Lifestyle");
+                } else if (position == 4) {
+                    intent.putExtra("collection_id", "608");
+                    intent.putExtra("collection_name", "Universe");
+                } else if (position == 5) {
+                    intent.putExtra("collection_id", "505");
+                    intent.putExtra("collection_name", "Art");
+                } else if (position == 6) {
+                    intent.putExtra("collection_id", "564");
+                    intent.putExtra("collection_name", "Scenery");
+                } else if (position == 7) {
+                    intent.putExtra("collection_id", "627");
+                    intent.putExtra("collection_name", "Others");
+                }
+
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -58,12 +94,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
             name01 = itemView.findViewById(R.id.tvName01);
             note01 = itemView.findViewById(R.id.tvNote01);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mContext.startActivity(new Intent(mContext, ListCollection.class));
-                }
-            });
+
         }
     }
 }

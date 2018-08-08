@@ -10,15 +10,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.model.ListCollectionItem;
 import com.duan1.nhom4.wallpaper.uis.activities.CollectionDetailActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class ListCollectionAdapter extends RecyclerView.Adapter<ListCollectionAdapter.ViewHolder>{
+
     private List<ListCollectionItem> itemList;
     private Context context;
+
     public ListCollectionAdapter(Context context, List<ListCollectionItem> itemList) {
         this.itemList = itemList;
         this.context = context;
@@ -35,15 +39,17 @@ public class ListCollectionAdapter extends RecyclerView.Adapter<ListCollectionAd
 
     @Override
     public void onBindViewHolder(@NonNull ListCollectionAdapter.ViewHolder holder, final int position) {
-        ListCollectionItem listCollectionItem = itemList.get(position);
+        final ListCollectionItem item = itemList.get(position);
+
+        Picasso.with(context).load(item.getImg()).into(holder.imgView);
 
         holder.imgView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, CollectionDetailActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("img_url",item.getImg());
                 context.startActivity(intent);
-                Toast.makeText(context, "anh" + (position+1), Toast.LENGTH_SHORT).show();
             }
         });
     }

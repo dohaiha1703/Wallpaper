@@ -78,7 +78,7 @@ public class SignInActivity extends BaseActivity {
             public void run() {
                 dialog.dismiss();
             }
-        }, 3000);
+        }, 3000000);
     }
 
     public void eventClick() {
