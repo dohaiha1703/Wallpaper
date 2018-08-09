@@ -1,5 +1,7 @@
 package com.duan1.nhom4.wallpaper.uis.activities;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -20,17 +22,20 @@ import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ListCollection extends BaseActivity {
-    Toolbar toolbar;
+    private Toolbar toolbar;
     private RecyclerView recyclerView;
     private List<ListCollectionItem> collectionItems;
     private ListCollectionAdapter adapter;
     private List<String> links;
     private String idPost, namePost;
+    private ProgressDialog dialog;
 
 
     @Override
@@ -47,6 +52,7 @@ public class ListCollection extends BaseActivity {
         links = new ArrayList<>();
         idPost = null;
         namePost = null;
+        dialog = new ProgressDialog(this);
     }
 
     @Override
@@ -57,7 +63,7 @@ public class ListCollection extends BaseActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                startActivity(new Intent(ListCollection.this, HomeActivity.class));
                 //quay lại trang vừa ấn
             }
         });
@@ -66,6 +72,7 @@ public class ListCollection extends BaseActivity {
         fakeData();
         getLinkMedia();
         recyclerView.setAdapter(adapter);
+        showSpinerProgress();
     }
 
     public void fakeData() {
@@ -100,6 +107,7 @@ public class ListCollection extends BaseActivity {
                         links.add(link);
                     }
                     fakeData();
+                    dialog.dismiss();
                 }
             }
 
@@ -117,6 +125,33 @@ public class ListCollection extends BaseActivity {
             namePost = getIntent().getStringExtra("collection_name");
 
         }
+    }
+
+    public void showSpinerProgress() {
+
+        //lap thong tin
+//        dialog.setTitle("open");
+        dialog.setMessage("Loading");
+//
+//        dialog.setButton(ProgressDialog.BUTTON_POSITIVE, "YES", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//            }
+//        });
+
+        //thiet lap k the huy - co the huy
+        dialog.setCancelable(true);
+
+        //show dialog
+        dialog.show();
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        }, 20000000);
     }
 
 }

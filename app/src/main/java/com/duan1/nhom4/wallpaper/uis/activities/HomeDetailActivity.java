@@ -36,7 +36,7 @@ public class HomeDetailActivity extends BaseActivity {
     private ImageView imgHomeDetail, imgHomeDetailFavorite, imgHomeDetailDownload;
     private Bitmap bitmapUse;
     private String imgUrl;
-    public ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
     private DataBaseManager dbManager;
     private boolean check = true;
     private List<FavoriteModel> favoriteModels;
@@ -56,7 +56,6 @@ public class HomeDetailActivity extends BaseActivity {
         imgHomeDetailFavorite = findViewById(R.id.imgHomeDetailFavorite);
         imgHomeDetailDownload = findViewById(R.id.imgHomeDetailDownload);
         btnApply = findViewById(R.id.btnApply);
-        btnApply.setVisibility(View.INVISIBLE);
 
         dbManager = new DataBaseManager(HomeDetailActivity.this);
 
@@ -85,8 +84,8 @@ public class HomeDetailActivity extends BaseActivity {
         }
 
         downloadModels = dbManager.getAllDownload();
-        for (int j = 0; j < downloadModels.size(); j++){
-            if (imgUrl.equals(downloadModels.get(j).getPlaceImage())){
+        for (int j = 0; j < downloadModels.size(); j++) {
+            if (imgUrl.equals(downloadModels.get(j).getPlaceImage())) {
                 imgHomeDetailDownload.setVisibility(View.INVISIBLE);
                 btnApply.setVisibility(View.VISIBLE);
             }
@@ -99,7 +98,6 @@ public class HomeDetailActivity extends BaseActivity {
 
         if (check) {
             dbManager.insertFavorite(imgUrl);
-            Toast.makeText(mContext, "Added", Toast.LENGTH_SHORT).show();
             check = false;
             imgHomeDetailFavorite.setVisibility(View.INVISIBLE);
         }
@@ -121,7 +119,6 @@ public class HomeDetailActivity extends BaseActivity {
             startDownload(imgUrl);
             dbManager.insertDownload(imgUrl);
             imgHomeDetailDownload.setVisibility(View.INVISIBLE);
-            btnApply.setVisibility(View.VISIBLE);
         }
     }
 

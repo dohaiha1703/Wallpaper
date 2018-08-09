@@ -59,6 +59,7 @@ public class FavoriteRecycelViewAdapter extends RecyclerView.Adapter<FavoriteRec
                 intent.putExtra("img_url", model.getFavoriteImage());
                 intent.putExtra("img_pos", position);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                 mContext.startActivity(intent);
             }
         });

@@ -50,7 +50,7 @@ public class FavoriteActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
-//                startActivity(new Intent(FavoriteActivity.this, HomeActivity.class));
+                startActivity(new Intent(FavoriteActivity.this, HomeActivity.class));
             }
         });
 

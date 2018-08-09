@@ -111,7 +111,10 @@ public class HomeActivity extends BaseActivity {
                         break;
 
                     case R.id.sign_out:
+                        Intent intent = new Intent(HomeActivity.this, SignInActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         finish();
+                        startActivity(intent);
                         break;
                 }
 
@@ -161,6 +164,7 @@ public class HomeActivity extends BaseActivity {
                 Log.e("sizeLink", listLink.size() + "");
                 Log.e("sizeName", listNameImage.size() + "");
                 fakeData();
+                dialog.dismiss();
             }
 
             @Override
@@ -194,6 +198,6 @@ public class HomeActivity extends BaseActivity {
             public void run() {
                 dialog.dismiss();
             }
-        }, 2000);
+        }, 20000000);
     }
 }
