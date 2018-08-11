@@ -29,28 +29,12 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="7"
+                    android:layout_weight="8"
                     android:gravity="center"
                     android:textColor="#000"
                     android:text="New Wallpaper"
                     android:textSize="24sp" />
 
-
-                <ImageView
-                    android:id="@+id/imgSearch"
-                    android:layout_width="0dp"
-                    android:onClick="openSearchActivity"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.5"
-                    android:padding="7dp"
-                    android:src="@drawable/ic_action_search" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.5"
-                    android:padding="7dp"
-                    android:src="@drawable/ic_notifications" />
 
             </LinearLayout>
 

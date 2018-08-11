@@ -130,7 +130,9 @@ public class SignInActivity extends BaseActivity {
                         String status = object.get("status").getAsString();
                         if (status.equals("ok")) {
                             dialog.dismiss();
-                            startActivity(new Intent(SignInActivity.this, HomeActivity.class));
+                            Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
+                            intent.putExtra("user_name", username.getText().toString());
+                            startActivity(intent);
                         } else {
                             dialog.dismiss();
                             Toast.makeText(SignInActivity.this, "Wrong User name or Password", Toast.LENGTH_SHORT).show();

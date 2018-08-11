@@ -53,14 +53,7 @@
                 android:textSize="25dp" />
 
 
-            <ImageView
-                android:id="@+id/imgCollectionFavorite"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="5dp"
-                android:layout_weight="1.3"
-                android:onClick="eventFavorite"
-                android:src="@drawable/ic_action_star_0" />
+
 
 
             <ImageView
@@ -71,6 +64,16 @@
                 android:layout_marginHorizontal="5dp"
                 android:layout_weight="1.3"
                 android:src="@drawable/ic_action_download" />
+
+
+            <ImageView
+                android:id="@+id/imgCollectionFavorite"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="5dp"
+                android:layout_weight="1.3"
+                android:onClick="eventFavorite"
+                android:src="@drawable/ic_action_star_0" />
 
 
         </LinearLayout>

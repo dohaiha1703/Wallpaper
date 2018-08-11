@@ -1,6 +1,7 @@
 package com.duan1.nhom4.wallpaper.uis.activities;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.duan1.nhom4.wallpaper.adapter.HomeRecyclerviewAdapter;
@@ -42,7 +44,7 @@ public class HomeActivity extends BaseActivity {
     private HomeRecyclerviewAdapter adapter;
     private List<String> listLink;
     private List<String> listNameImage;
-
+    private TextView getUserName;
     private ProgressDialog dialog;
 
 
@@ -56,6 +58,7 @@ public class HomeActivity extends BaseActivity {
         toolbar = findViewById(R.id.tbHome);
         navigationView = findViewById(R.id.navHome);
         drawerLayout = findViewById(R.id.drawerLayout);
+        getUserName = findViewById(R.id.tvGetUserName);
 
         recyclerView = findViewById(R.id.rvHomeItem);
         items = new ArrayList<>();
@@ -73,6 +76,8 @@ public class HomeActivity extends BaseActivity {
         createRecyclerView();
         getLinkAllMedia();
         showSpinerProgress();
+
+
     }
 
     public void createToolBarAndNavgation() {
@@ -83,6 +88,18 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(Gravity.START);
+
+//                Timer timer = new Timer();
+//                timer.schedule(new TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        if (getIntent().hasExtra("user_name")) {
+//                            getUserName.setText("Welcome " + getIntent().getStringExtra("user_name"));
+//                        }
+//                    }
+//                }, 1000);
+
+
             }
         });
 
@@ -107,7 +124,7 @@ public class HomeActivity extends BaseActivity {
 
 
                     case R.id.about:
-                        Toast.makeText(mContext, "about", Toast.LENGTH_SHORT).show();
+                        showAlertDialog();
                         break;
 
                     case R.id.sign_out:
@@ -122,6 +139,27 @@ public class HomeActivity extends BaseActivity {
                 return false;
             }
         });
+
+
+    }
+
+    public void showAlertDialog() {
+        //dinh nghia dialog
+        final android.support.v7.app.AlertDialog.Builder builder =
+                new android.support.v7.app.AlertDialog.Builder(HomeActivity.this);
+
+        //thiet lap header, body, button
+//        builder.setTitle("AlerDialog");
+        builder.setMessage("We are Group 4. \nSubject Project 1.\nClass PT13251-MOB");
+        builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+//                Toast.makeText(HomeActivity.this, "close", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //show
+        builder.show();
     }
 
     public void createRecyclerView() {
@@ -188,7 +226,7 @@ public class HomeActivity extends BaseActivity {
 //        });
 
         //thiet lap k the huy - co the huy
-        dialog.setCancelable(true);
+        dialog.setCancelable(false);
 
         //show dialog
         dialog.show();

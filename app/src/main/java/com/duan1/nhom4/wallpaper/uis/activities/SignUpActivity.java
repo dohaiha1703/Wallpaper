@@ -142,6 +142,7 @@ public class SignUpActivity extends BaseActivity {
                                dialog.dismiss();
                            }
                        }catch (NullPointerException e){
+                           dialog.dismiss();
                            Toast.makeText(SignUpActivity.this, "Invalid data(User name or Email)", Toast.LENGTH_SHORT).show();
                        }
                     }
