@@ -128,10 +128,7 @@ public class HomeActivity extends BaseActivity {
                         break;
 
                     case R.id.sign_out:
-                        Intent intent = new Intent(HomeActivity.this, SignInActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        finish();
-                        startActivity(intent);
+                        showAlertDialogSignOut();
                         break;
                 }
 
@@ -150,18 +147,46 @@ public class HomeActivity extends BaseActivity {
 
         //thiet lap header, body, button
 //        builder.setTitle("AlerDialog");
-        builder.setMessage("We are Group 4. \nSubject Project 1.\nClass PT13251-MOB");
+        builder.setMessage("Find out more on our website: \nhttp://nhom4.dotplays.com/");
         builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 //                Toast.makeText(HomeActivity.this, "close", Toast.LENGTH_SHORT).show();
             }
         });
-
         //show
         builder.show();
     }
 
+    public void showAlertDialogSignOut() {
+        //dinh nghia dialog
+        final android.support.v7.app.AlertDialog.Builder builder =
+                new android.support.v7.app.AlertDialog.Builder(HomeActivity.this);
+
+        //thiet lap header, body, button
+//        builder.setTitle("AlerDialog");
+        builder.setMessage("Do you want to Sign out?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(HomeActivity.this, SignInActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                finish();
+                startActivity(intent);
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+
+        //show
+        builder.show();
+    }
     public void createRecyclerView() {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
