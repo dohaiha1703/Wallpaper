@@ -30,7 +30,6 @@ public class DataBaseManager extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(FavoriteModel.CREATE_TABLE);
         db.execSQL(DownloadModel.CREATE_TABLE);
-        Toast.makeText(context, "Create Database successfully", Toast.LENGTH_SHORT).show();
     }
 
     @Override

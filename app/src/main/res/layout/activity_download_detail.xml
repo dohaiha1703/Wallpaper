@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".uis.activities.FavoriteDetailActivity">
+    tools:context=".uis.activities.DownloadDetailActivity">
 
     <ImageView
         android:id="@+id/imgDownloadDetail"
@@ -48,6 +48,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:text="Apply"
+                android:onClick="applyDownoadWallpaper"
                 android:textAllCaps="false"
                 android:textSize="25dp" />
 

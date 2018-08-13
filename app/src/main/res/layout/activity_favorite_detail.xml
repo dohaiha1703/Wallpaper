@@ -48,6 +48,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:text="Apply"
+                android:onClick="applyFavoriteWallpaper"
                 android:textAllCaps="false"
                 android:textSize="25dp" />
 

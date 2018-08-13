@@ -63,7 +63,7 @@ public class ListCollection extends BaseActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ListCollection.this, HomeActivity.class));
+                finish();
                 //quay lại trang vừa ấn
             }
         });

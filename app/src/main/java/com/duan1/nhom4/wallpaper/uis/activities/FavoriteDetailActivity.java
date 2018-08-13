@@ -1,8 +1,10 @@
 package com.duan1.nhom4.wallpaper.uis.activities;
 
 import android.app.ProgressDialog;
+import android.app.WallpaperManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,6 +17,7 @@ import com.duan1.nhom4.wallpaper.model.FavoriteModel;
 import com.duan1.nhom4.wallpaper.uis.BaseActivity;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.List;
 
 public class FavoriteDetailActivity extends BaseActivity {
@@ -87,6 +90,53 @@ public class FavoriteDetailActivity extends BaseActivity {
                     .with(FavoriteDetailActivity.this)
                     .load(imgUrl)
                     .into(imgFavorite);
+        }
+    }
+
+    public void applyFavoriteWallpaper(View view) {
+        new setWallpaer().execute(imgUrl);
+    }
+
+    public class setWallpaer extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+
+            try {
+                bitmapUse = Picasso.with(FavoriteDetailActivity.this)
+                        .load(imgUrl)
+                        .get();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return bitmapUse;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = new ProgressDialog(FavoriteDetailActivity.this);
+            progressDialog.setMessage("Please wait...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmapUse);
+
+
+            WallpaperManager wallpaperManager = WallpaperManager.getInstance(getBaseContext());
+
+            try {
+                wallpaperManager.setBitmap(bitmapUse);
+                progressDialog.dismiss();
+                Toast.makeText(FavoriteDetailActivity.this, "Succeed", Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }

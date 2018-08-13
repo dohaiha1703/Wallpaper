@@ -6,6 +6,7 @@ import android.app.WallpaperManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -91,4 +92,51 @@ public class DownloadDetailActivity extends BaseActivity {
         }
     }
 
+    public void applyDownoadWallpaper(View view) {
+        new setWallpaer().execute(imgUrl);
+    }
+
+
+    public class setWallpaer extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+
+            try {
+                bitmapUse = Picasso.with(DownloadDetailActivity.this)
+                        .load(imgUrl)
+                        .get();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return bitmapUse;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = new ProgressDialog(DownloadDetailActivity.this);
+            progressDialog.setMessage("Please wait...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmapUse);
+
+
+            WallpaperManager wallpaperManager = WallpaperManager.getInstance(getBaseContext());
+
+            try {
+                wallpaperManager.setBitmap(bitmapUse);
+                progressDialog.dismiss();
+                Toast.makeText(DownloadDetailActivity.this, "Succeed", Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
 }

@@ -84,6 +84,7 @@ public class CollectionDetailActivity extends BaseActivity {
                 Uri.parse(url));
         mRqRequest.setDescription("This was downloaded from Wallpaer");
 //        mRqRequest.setDestinationUri(Uri.parse("give your local path"));
+        mRqRequest.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
         long idDownLoad = mManager.enqueue(mRqRequest);
 
     }

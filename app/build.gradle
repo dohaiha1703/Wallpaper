@@ -37,4 +37,8 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     //picaso hien thi hinh anh
     implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    implementation 'com.google.firebase:firebase-core:16.0.0'
 }
+
+apply plugin: 'com.google.gms.google-services'
