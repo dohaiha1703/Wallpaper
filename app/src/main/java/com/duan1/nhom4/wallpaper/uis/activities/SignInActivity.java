@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.AppCompatButton;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -52,6 +51,7 @@ public class SignInActivity extends BaseActivity {
     public void intialVariables() {
         restoringPreferences();
         eventClick();
+        getImcomingData();
     }
 
     public void showSpinerProgress() {
@@ -133,6 +133,7 @@ public class SignInActivity extends BaseActivity {
                             Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
                             intent.putExtra("user_name", username.getText().toString());
                             startActivity(intent);
+                            finish();
                         } else {
                             dialog.dismiss();
                             Toast.makeText(SignInActivity.this, "Wrong User name or Password", Toast.LENGTH_SHORT).show();
@@ -168,7 +169,8 @@ public class SignInActivity extends BaseActivity {
             editor.putString("password", pass);
             editor.putBoolean("savestatus", chk);
         }
-        editor.commit();
+        editor.apply();
+//        editor.commit();
     }
 
     private void restoringPreferences() {
@@ -181,5 +183,12 @@ public class SignInActivity extends BaseActivity {
             password.setText(pass);
         }
         checkBox.setChecked(chk);
+    }
+
+    private void getImcomingData(){
+        if (getIntent().hasExtra("user_name")){
+            String user = getIntent().getStringExtra("user_name");
+            username.setText(user);
+        }
     }
 }

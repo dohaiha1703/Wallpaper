@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.database.DataBaseManager;
 import com.duan1.nhom4.wallpaper.model.FavoriteModel;
@@ -26,7 +25,7 @@ public class FavoriteDetailActivity extends BaseActivity {
     private ImageView imgDownload, imgFavorite, imgSetFavorite;
     private Bitmap bitmapUse;
     private String imgUrl;
-    public ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
     private DataBaseManager dbManager;
     private boolean check = true;
     private List<FavoriteModel> favoriteModels;
@@ -66,7 +65,7 @@ public class FavoriteDetailActivity extends BaseActivity {
         imgSetFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (check == true) {
+                if (check) {
                     dbManager.deleteFavoriteItem(favoriteModels.get(pos));
                     imgSetFavorite.setVisibility(View.INVISIBLE);
                     check = false;

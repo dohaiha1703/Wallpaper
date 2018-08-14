@@ -1,27 +1,18 @@
 package com.duan1.nhom4.wallpaper.uis.activities;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.app.WallpaperManager;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.database.DataBaseManager;
 import com.duan1.nhom4.wallpaper.model.DownloadModel;
-import com.duan1.nhom4.wallpaper.model.FavoriteModel;
 import com.duan1.nhom4.wallpaper.uis.BaseActivity;
 import com.squareup.picasso.Picasso;
 
@@ -33,7 +24,7 @@ public class DownloadDetailActivity extends BaseActivity {
     private ImageView imgDownload, imgDelete;
     private Bitmap bitmapUse;
     private String imgUrl;
-    public ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
     private DataBaseManager dbManager;
     private boolean check = true;
     private List<DownloadModel> downloadModels;
@@ -68,7 +59,7 @@ public class DownloadDetailActivity extends BaseActivity {
         imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (check == true){
+                if (check){
                     dbManager.deleteDownloadItem(downloadModels.get(pos));
                     imgDelete.setVisibility(View.INVISIBLE);
                     check = false;

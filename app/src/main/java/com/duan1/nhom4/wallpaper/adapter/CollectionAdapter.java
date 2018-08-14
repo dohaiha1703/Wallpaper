@@ -12,9 +12,7 @@ import android.widget.TextView;
 
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.model.CollectionsItem;
-import com.duan1.nhom4.wallpaper.uis.activities.CollectionDetailActivity;
 import com.duan1.nhom4.wallpaper.uis.activities.ListCollection;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 

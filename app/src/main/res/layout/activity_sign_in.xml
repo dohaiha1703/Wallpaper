@@ -6,6 +6,7 @@
     android:background="@drawable/background"
     android:orientation="vertical"
     android:padding="16dp"
+    tools:context=".uis.activities.SignInActivity"
     android:weightSum="10">
 
     <LinearLayout
@@ -43,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:drawableLeft="@drawable/ic_account_box"
+                android:drawableStart="@drawable/ic_account_box"
                 android:hint="Username"
                 android:inputType="text"
                 android:textColor="#fff"
@@ -62,7 +63,7 @@
                 android:id="@+id/edPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableLeft="@drawable/ic_lock"
+                android:drawableStart="@drawable/ic_lock"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:textColor="#fff" />
@@ -108,7 +109,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:gravity="center"
-            android:onClick="moveSignUp"
             android:text="Sign Up"
             android:textAllCaps="false"
             android:textSize="25dp"

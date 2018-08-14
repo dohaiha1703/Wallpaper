@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.duan1.nhom4.wallpaper.R;
@@ -13,7 +12,6 @@ import com.duan1.nhom4.wallpaper.database.DataBaseManager;
 import com.duan1.nhom4.wallpaper.model.FavoriteModel;
 import com.duan1.nhom4.wallpaper.uis.BaseActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FavoriteActivity extends BaseActivity {

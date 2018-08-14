@@ -2,24 +2,19 @@ package com.duan1.nhom4.wallpaper.uis.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.rest.RestClientSignUp;
 import com.duan1.nhom4.wallpaper.uis.BaseActivity;
-import com.duan1.nhom4.wallpaper.R;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -44,11 +39,10 @@ public class SignUpActivity extends BaseActivity {
 
     @Override
     public void intialView() {
-        btnSignup =  findViewById(R.id.btnSignup);
-        edtUserNameSign = (EditText) findViewById(R.id.edtUserNameSign);
-        edtEmailSign = (EditText) findViewById(R.id.edtEmailSign);
-        edtPasswordSign = (EditText) findViewById(R.id.edtPasswordSign);
-        edtDisplaySign = findViewById(R.id.edtUserNameSign);
+        btnSignup = findViewById(R.id.btnSignup);
+        edtUserNameSign = findViewById(R.id.edtUserNameSign);
+        edtEmailSign = findViewById(R.id.edtEmailSign);
+        edtPasswordSign = findViewById(R.id.edtPasswordSign);
         toolbar = findViewById(R.id.toolbarSignUp);
         dialog = new ProgressDialog(SignUpActivity.this);
 
@@ -104,7 +98,7 @@ public class SignUpActivity extends BaseActivity {
                 } else {
                     setBtnBack(edtUserNameSign.getText().toString(),
                             edtEmailSign.getText().toString(),
-                            edtDisplaySign.getText().toString(),
+                            edtUserNameSign.getText().toString(),
                             edtPasswordSign.getText().toString());
                     showSpinerProgress();
                 }
@@ -128,23 +122,25 @@ public class SignUpActivity extends BaseActivity {
                 callSignUp.enqueue(new Callback<JsonElement>() {
                     @Override
                     public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                       try{
-                           JsonElement element = response.body();
-                           JsonObject object = element.getAsJsonObject();
-                           String status = object.get("status").getAsString();
-                           if (status.equals("ok")) {
-                               Toast.makeText(getApplicationContext(), "Sign up Succeed", Toast.LENGTH_SHORT).show();
-                               startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
-                               dialog.dismiss();
-                           }
-                           else {
-                               Toast.makeText(SignUpActivity.this, "Invalid data", Toast.LENGTH_SHORT).show();
-                               dialog.dismiss();
-                           }
-                       }catch (NullPointerException e){
-                           dialog.dismiss();
-                           Toast.makeText(SignUpActivity.this, "Invalid data(User name or Email)", Toast.LENGTH_SHORT).show();
-                       }
+                        try {
+                            JsonElement element = response.body();
+                            JsonObject object = element.getAsJsonObject();
+                            String status = object.get("status").getAsString();
+                            if (status.equals("ok")) {
+                                Toast.makeText(getApplicationContext(), "Sign up Succeed", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
+                                intent.putExtra("user_name", edtUserNameSign.getText().toString());
+                                startActivity(intent);
+                                dialog.dismiss();
+                                finish();
+                            } else {
+                                Toast.makeText(SignUpActivity.this, "Invalid data", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        } catch (NullPointerException e) {
+                            dialog.dismiss();
+                            Toast.makeText(SignUpActivity.this, "Invalid data(User name or Email)", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override

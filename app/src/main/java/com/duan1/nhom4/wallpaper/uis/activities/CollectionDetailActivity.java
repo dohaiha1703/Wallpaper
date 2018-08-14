@@ -7,10 +7,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,7 +20,7 @@ import com.squareup.picasso.Picasso;
 import java.io.IOException;
 
 public class CollectionDetailActivity extends BaseActivity {
-    Toolbar toolbar;
+    private Toolbar toolbar;
     private String imgUrl;
     private ImageView imgSubjectDetail, imgCollectionFavorite, imgCollectionDownload;
     private DataBaseManager dbManager;
@@ -78,7 +74,7 @@ public class CollectionDetailActivity extends BaseActivity {
     }
 
 
-    public void startDownload(String url) {
+    private void startDownload(String url) {
         DownloadManager mManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
         DownloadManager.Request mRqRequest = new DownloadManager.Request(
                 Uri.parse(url));

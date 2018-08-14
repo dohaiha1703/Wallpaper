@@ -14,7 +14,6 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.duan1.nhom4.wallpaper.adapter.HomeRecyclerviewAdapter;
 import com.duan1.nhom4.wallpaper.model.HomeItem;
@@ -80,7 +79,7 @@ public class HomeActivity extends BaseActivity {
 
     }
 
-    public void createToolBarAndNavgation() {
+    private void createToolBarAndNavgation() {
         toolbar.setTitle("New Wallpaper");
         toolbar.setNavigationIcon(R.drawable.ic_menu);
 
@@ -140,7 +139,7 @@ public class HomeActivity extends BaseActivity {
 
     }
 
-    public void showAlertDialog() {
+    private void showAlertDialog() {
         //dinh nghia dialog
         final android.support.v7.app.AlertDialog.Builder builder =
                 new android.support.v7.app.AlertDialog.Builder(HomeActivity.this);
@@ -158,7 +157,7 @@ public class HomeActivity extends BaseActivity {
         builder.show();
     }
 
-    public void showAlertDialogSignOut() {
+    private void showAlertDialogSignOut() {
         //dinh nghia dialog
         final android.support.v7.app.AlertDialog.Builder builder =
                 new android.support.v7.app.AlertDialog.Builder(HomeActivity.this);
@@ -187,7 +186,7 @@ public class HomeActivity extends BaseActivity {
         //show
         builder.show();
     }
-    public void createRecyclerView() {
+    private void createRecyclerView() {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -205,7 +204,7 @@ public class HomeActivity extends BaseActivity {
         startActivity(new Intent(HomeActivity.this, SearchActivity.class));
     }
 
-    public void getLinkAllMedia() {
+    private void getLinkAllMedia() {
         Call<JsonElement> call = GetAllImageRestClient.getApiInterface().getAllMedia();
 
         call.enqueue(new Callback<JsonElement>() {
@@ -237,7 +236,7 @@ public class HomeActivity extends BaseActivity {
         });
     }
 
-    public void showSpinerProgress() {
+    private void showSpinerProgress() {
 
         //lap thong tin
 //        dialog.setTitle("open");

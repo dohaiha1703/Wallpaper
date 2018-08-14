@@ -8,9 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.model.ListCollectionItem;
 import com.duan1.nhom4.wallpaper.uis.activities.CollectionDetailActivity;

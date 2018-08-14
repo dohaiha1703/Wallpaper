@@ -1,13 +1,11 @@
 
 package com.duan1.nhom4.wallpaper.uis.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
 
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.adapter.DowloadRecycelAdapter;
@@ -15,7 +13,6 @@ import com.duan1.nhom4.wallpaper.database.DataBaseManager;
 import com.duan1.nhom4.wallpaper.model.DownloadModel;
 import com.duan1.nhom4.wallpaper.uis.BaseActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DownloadActivity extends BaseActivity {

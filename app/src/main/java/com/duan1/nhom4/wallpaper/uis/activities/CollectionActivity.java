@@ -1,8 +1,5 @@
 package com.duan1.nhom4.wallpaper.uis.activities;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -11,7 +8,6 @@ import android.view.View;
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.adapter.CollectionAdapter;
 import com.duan1.nhom4.wallpaper.model.CollectionsItem;
-import com.duan1.nhom4.wallpaper.model.HomeItem;
 import com.duan1.nhom4.wallpaper.uis.BaseActivity;
 
 import java.util.ArrayList;

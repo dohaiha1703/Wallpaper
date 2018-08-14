@@ -1,16 +1,13 @@
 package com.duan1.nhom4.wallpaper.uis.activities;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.adapter.ListCollectionAdapter;
 import com.duan1.nhom4.wallpaper.model.ListCollectionItem;
@@ -75,7 +72,7 @@ public class ListCollection extends BaseActivity {
         showSpinerProgress();
     }
 
-    public void fakeData() {
+    private void fakeData() {
         for (int i = 0; i < links.size(); i++) {
             ListCollectionItem item = new ListCollectionItem(links.get(i));
             collectionItems.add(item);
@@ -87,7 +84,7 @@ public class ListCollection extends BaseActivity {
 
     }
 
-    public void getLinkMedia() {
+    private void getLinkMedia() {
         retrofit2.Call<JsonElement> call = GetCollectionRestClient.getCollectionApiInterface().
                 getMediaForCollection(idPost, "100");
 
@@ -119,7 +116,7 @@ public class ListCollection extends BaseActivity {
 
     }
 
-    public void getIncomingData(){
+    private void getIncomingData(){
         if (getIntent().hasExtra("collection_id") && getIntent().hasExtra("collection_name")) {
             idPost = getIntent().getStringExtra("collection_id");
             namePost = getIntent().getStringExtra("collection_name");
@@ -127,7 +124,7 @@ public class ListCollection extends BaseActivity {
         }
     }
 
-    public void showSpinerProgress() {
+    private void showSpinerProgress() {
 
         //lap thong tin
 //        dialog.setTitle("open");

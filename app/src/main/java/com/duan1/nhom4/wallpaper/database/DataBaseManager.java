@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.duan1.nhom4.wallpaper.model.DownloadModel;
 import com.duan1.nhom4.wallpaper.model.FavoriteModel;
