@@ -4,9 +4,11 @@ import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,6 +28,13 @@ public class CollectionDetailActivity extends BaseActivity {
     private DataBaseManager dbManager;
     private ProgressDialog progressDialog;
     private Bitmap bitmapUse;
+    private final static String INTENT_KEY = "INTENT_KEY";
+
+    public Intent createInten(String str) {
+        Intent intent = new Intent(CollectionDetailActivity.this, CollectionDetailActivity.class);
+        intent.putExtra(INTENT_KEY, str);
+        return intent;
+    }
 
     @Override
     public int injectLayout() {
@@ -47,7 +56,7 @@ public class CollectionDetailActivity extends BaseActivity {
 
     @Override
     public void intialVariables() {
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_arrow_left);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +103,7 @@ public class CollectionDetailActivity extends BaseActivity {
     }
 
     public void applyWallpaper(View view) {
-       new setWallpaer().execute(imgUrl);
+        new setWallpaer().execute(imgUrl);
     }
 
 

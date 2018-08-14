@@ -17,9 +17,9 @@ import java.util.List;
 public class FavoriteActivity extends BaseActivity {
     private RecyclerView recyclerPlace;
     private List<FavoriteModel> favoriteModels;
+    private DataBaseManager dbManager;
     private FavoriteRecycelViewAdapter adapter;
     private Toolbar toolbar;
-    private DataBaseManager dbManager;
 
 
     @Override
@@ -42,7 +42,8 @@ public class FavoriteActivity extends BaseActivity {
     public void intialVariables() {
 
         toolbar.setTitle("Favorite");
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_arrow_left);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

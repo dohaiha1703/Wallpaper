@@ -27,7 +27,6 @@ public class CollectionActivity extends BaseActivity {
 
     @Override
     public void intialView() {
-
         toolbar = findViewById(R.id.tollbarCollectionActivity);
         recyclerView = findViewById(R.id.recyclerView01);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -39,51 +38,30 @@ public class CollectionActivity extends BaseActivity {
 
     @Override
     public void intialVariables() {
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_arrow_left);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setTitle("Collection");
-
+        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
         fakeData();
     }
 
     private void fakeData() {
-        CollectionsItem item1 = new CollectionsItem("Nature",
-                R.drawable.nature_background, "Forest, Coast, Lake, ...");
+        CollectionsItem item1 = new CollectionsItem("Anime",
+                R.drawable.cate_anime, "");
 
-        CollectionsItem item2 = new CollectionsItem("Movies",
-                R.drawable.movies_background, "Drama, Action, Science, ...");
+        CollectionsItem item2 = new CollectionsItem("Girl",
+                R.drawable.cate_girl, "");
 
-        CollectionsItem item3 = new CollectionsItem("Creative",
-                R.drawable.creative_background, "More than you expect");
-
-        CollectionsItem item4 = new CollectionsItem("Lifestyle",
-                R.drawable.lifestyle_background, "Lifestyle of everywhere on the world");
-
-        CollectionsItem item5 = new CollectionsItem("Universe",
-                R.drawable.universe_background, "Galaxy, Stars, Space ...");
-
-        CollectionsItem item6 = new CollectionsItem("Art",
-                R.drawable.art_background, "Beautiful and abstract");
-
-        CollectionsItem item7 = new CollectionsItem("Scenery",
-                R.drawable.scenery_background, "Where spectacular");
-
-        CollectionsItem item8 = new CollectionsItem("Others",
-                R.drawable.others_background, "Others topics");
+        CollectionsItem item3 = new CollectionsItem("3D",
+                R.drawable.cate_3d, "");
         items.add(item1);
         items.add(item2);
         items.add(item3);
-        items.add(item4);
-        items.add(item5);
-        items.add(item6);
-        items.add(item7);
-        items.add(item8);
         adapter.notifyDataSetChanged();
     }
 }

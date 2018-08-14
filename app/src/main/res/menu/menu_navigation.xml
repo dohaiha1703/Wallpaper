@@ -3,38 +3,65 @@
 
     <group android:checkableBehavior="single">
 
+        <item
+            android:id="@+id/latest"
+            android:icon="@drawable/ic_home_white"
+            android:title="Latest" />
 
         <item
-            android:id="@+id/collection"
+            android:id="@+id/categories"
             android:icon="@drawable/ic_collections"
-            android:title="Collection" />
+            android:title="Categories" />
 
 
         <item
             android:id="@+id/favorite"
-            android:icon="@drawable/ic_favorite"
+            android:icon="@drawable/ic_favorite_border_white_24dp"
             android:title="Favorite" />
+
+        <!--<item-->
+            <!--android:id="@+id/download"-->
+            <!--android:icon="@drawable/ic_action_download"-->
+            <!--android:title="Download" />-->
+
+        <item
+            android:id="@+id/gif"
+            android:icon="@drawable/ic_gif_white_50dp"
+            android:title="GIFs" />
+
+        <item
+            android:id="@+id/rate_app"
+            android:icon="@drawable/ic_star_border_white"
+            android:title="Rate App" />
+
+        <item
+            android:id="@+id/more_app"
+            android:icon="@drawable/ic_info_outline_white_24dp"
+            android:title="More App" />
+
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/ic_folder_open_white_24dp"
+            android:title="About us" />
+
+        <item
+            android:id="@+id/setting"
+            android:icon="@drawable/ic_settings_white_24dp"
+            android:title="Setting" />
 
 
         <item
-            android:id="@+id/download"
-            android:icon="@drawable/ic_action_download"
-            android:title="Download" />
+            android:id="@+id/privacy_policy"
+            android:icon="@drawable/ic_lock_outline_white_24dp"
+            android:title="Privacy Policy" />
+
+
     </group>
 
+    <!--<item android:title="Infomation">-->
+    <!--<menu>-->
 
-    <item android:title="Infomation">
-        <menu>
-            <item
-                android:id="@+id/about"
-                android:icon="@drawable/ic_info"
-                android:title="About us" />
-
-            <item
-                android:id="@+id/sign_out"
-                android:icon="@drawable/ic_action_exit"
-                android:title="Sign Out" />
-        </menu>
-    </item>
+    <!--</menu>-->
+    <!--</item>-->
 
 </menu>

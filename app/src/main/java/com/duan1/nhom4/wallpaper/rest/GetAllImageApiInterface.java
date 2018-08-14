@@ -6,6 +6,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface GetAllImageApiInterface {
-    @GET("media?per_page=50")
+    @GET("api.php?latest")
     Call<JsonElement> getAllMedia();
 }

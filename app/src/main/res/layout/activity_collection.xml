@@ -7,11 +7,10 @@
 
 
     <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
         android:id="@+id/tollbarCollectionActivity"
+        android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#fff">
-    </android.support.v7.widget.Toolbar>
+        android:background="@color/color_toolbar"></android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView01"

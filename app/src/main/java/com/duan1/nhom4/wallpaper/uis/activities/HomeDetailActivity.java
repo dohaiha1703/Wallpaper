@@ -4,10 +4,14 @@ import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.v7.widget.AppCompatButton;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -18,6 +22,7 @@ import com.duan1.nhom4.wallpaper.database.DataBaseManager;
 import com.duan1.nhom4.wallpaper.model.DownloadModel;
 import com.duan1.nhom4.wallpaper.model.FavoriteModel;
 import com.duan1.nhom4.wallpaper.uis.BaseActivity;
+import com.github.clans.fab.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -26,7 +31,7 @@ import java.util.List;
 public class HomeDetailActivity extends BaseActivity {
 
     private android.support.v7.widget.Toolbar toolbar;
-    private ImageView imgHomeDetail, imgHomeDetailFavorite, imgHomeDetailDownload;
+    private ImageView imgHomeDetail;
     private Bitmap bitmapUse;
     private String imgUrl;
     private ProgressDialog progressDialog;
@@ -34,7 +39,8 @@ public class HomeDetailActivity extends BaseActivity {
     private boolean check = true;
     private List<FavoriteModel> favoriteModels;
     private List<DownloadModel> downloadModels;
-    private AppCompatButton btnApply;
+    private int count;
+    private FloatingActionButton mButtonDownload, mButtonFavorite, mButtonShare, mButtonSetWallpaper;
 
 
     @Override
@@ -46,12 +52,15 @@ public class HomeDetailActivity extends BaseActivity {
     public void intialView() {
         toolbar = findViewById(R.id.toolbarHomeDetail);
         imgHomeDetail = findViewById(R.id.imgHomeDetail);
-        imgHomeDetailFavorite = findViewById(R.id.imgHomeDetailFavorite);
-        imgHomeDetailDownload = findViewById(R.id.imgHomeDetailDownload);
-        btnApply = findViewById(R.id.btnApply);
 
         dbManager = new DataBaseManager(HomeDetailActivity.this);
 
+        count = 0;
+
+        mButtonDownload = findViewById(R.id.menu_download);
+        mButtonFavorite = findViewById(R.id.menu_favorite);
+        mButtonSetWallpaper = findViewById(R.id.menu_set_wallpaper);
+        mButtonShare = findViewById(R.id.menu_share);
     }
 
     @Override
@@ -70,7 +79,8 @@ public class HomeDetailActivity extends BaseActivity {
         for (int i = 0; i < favoriteModels.size(); i++) {
             if (imgUrl.equals(favoriteModels.get(i).getFavoriteImage())) {
                 check = false;
-                imgHomeDetailFavorite.setVisibility(View.INVISIBLE);
+                mButtonFavorite.setClickable(false);
+                mButtonFavorite.setColorNormal(R.color.cardview_dark_background);
             } else {
                 check = true;
             }
@@ -79,12 +89,10 @@ public class HomeDetailActivity extends BaseActivity {
         downloadModels = dbManager.getAllDownload();
         for (int j = 0; j < downloadModels.size(); j++) {
             if (imgUrl.equals(downloadModels.get(j).getPlaceImage())) {
-                imgHomeDetailDownload.setVisibility(View.INVISIBLE);
-                btnApply.setVisibility(View.VISIBLE);
+                mButtonDownload.setClickable(false);
+                mButtonDownload.setColorNormal(R.color.cardview_dark_background);
             }
         }
-
-
     }
 
     public void favoriteEvent(View view) {
@@ -92,7 +100,8 @@ public class HomeDetailActivity extends BaseActivity {
         if (check) {
             dbManager.insertFavorite(imgUrl);
             check = false;
-            imgHomeDetailFavorite.setVisibility(View.INVISIBLE);
+            mButtonFavorite.setClickable(false);
+            mButtonFavorite.setColorNormal(R.color.cardview_dark_background);
         }
     }
 
@@ -108,10 +117,10 @@ public class HomeDetailActivity extends BaseActivity {
 
     public void downLoadImg(View view) {
         if (imgUrl.length() > 0) {
-
             startDownload(imgUrl);
             dbManager.insertDownload(imgUrl);
-            imgHomeDetailDownload.setVisibility(View.INVISIBLE);
+            mButtonDownload.setClickable(false);
+            mButtonDownload.setColorNormal(R.color.cardview_dark_background);
         }
     }
 
@@ -132,8 +141,43 @@ public class HomeDetailActivity extends BaseActivity {
 //        startActivity(mView);
 //    }
 
+
+    public void showAlertDialogSingleChoice() {
+
+        android.support.v7.app.AlertDialog.Builder builder =
+                new android.support.v7.app.AlertDialog.Builder(HomeDetailActivity.this);
+
+        builder.setTitle("What would you like?");
+
+        final String[] list = {"Set as Home Screen", "Set as Lock Screen", "Set Both"};
+
+        builder.setSingleChoiceItems(list, 0, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                count = which;
+            }
+        });
+
+        builder.setPositiveButton("Apply", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.e("count", count + "");
+                new setWallpaer().execute(imgUrl);
+            }
+        });
+        builder.show();
+    }
+
     public void ApplyWallpaper(View view) {
-        new setWallpaer().execute(imgUrl);
+        showAlertDialogSingleChoice();
+    }
+
+    public void shareAction(View view) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, imgUrl);
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
     }
 
     public class setWallpaer extends AsyncTask<String, Void, Bitmap> {
@@ -165,11 +209,34 @@ public class HomeDetailActivity extends BaseActivity {
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmapUse);
 
-
-            WallpaperManager wallpaperManager = WallpaperManager.getInstance(getBaseContext());
+//            WallpaperManager wallpaperManager = WallpaperManager.getInstance(getBaseContext());
 
             try {
-                wallpaperManager.setBitmap(bitmapUse);
+                if (count == 0) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        WallpaperManager.getInstance(getApplicationContext()).
+                                setBitmap(bitmapUse, null, true, WallpaperManager.FLAG_SYSTEM);
+                    }
+                } else if (count == 1) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        WallpaperManager.getInstance(getApplicationContext()).
+                                setBitmap(bitmapUse, null, true, WallpaperManager.FLAG_LOCK);
+                    } else {
+                        Toast.makeText(mContext, "SDK >= 24", Toast.LENGTH_SHORT).show();
+                    }
+                } else if (count == 2) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        WallpaperManager.getInstance(getApplicationContext()).
+                                setBitmap(bitmapUse, null, true, WallpaperManager.FLAG_LOCK);
+
+                        WallpaperManager.getInstance(getApplicationContext()).setBitmap(bitmapUse);
+                    } else {
+                        Toast.makeText(mContext, "SDK >= 24", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(mContext, "Error", Toast.LENGTH_SHORT).show();
+                }
+
                 progressDialog.dismiss();
                 Toast.makeText(HomeDetailActivity.this, "Succeed", Toast.LENGTH_SHORT).show();
             } catch (IOException e) {

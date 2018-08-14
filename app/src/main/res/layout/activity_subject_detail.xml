@@ -16,9 +16,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarSubjectDetail"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize">
-
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="?android:attr/actionBarSize"/>
 
     <FrameLayout
         android:layout_width="match_parent"

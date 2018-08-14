@@ -9,8 +9,8 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarDownloadActivity"
         android:layout_width="match_parent"
-        android:background="#fff"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/color_toolbar">
 
     </android.support.v7.widget.Toolbar>
 

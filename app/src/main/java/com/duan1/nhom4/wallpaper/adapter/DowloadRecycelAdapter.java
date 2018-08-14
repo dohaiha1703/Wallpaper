@@ -48,6 +48,13 @@ public class DowloadRecycelAdapter extends RecyclerView.Adapter<DowloadRecycelAd
                 mContext.startActivity(intent);
             }
         });
+
+        holder.imgDownload.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return false;
+            }
+        });
     }
 
     @Override
@@ -59,7 +66,6 @@ public class DowloadRecycelAdapter extends RecyclerView.Adapter<DowloadRecycelAd
         private ImageView imgDownload;
         public ViewHoder(View itemView) {
             super(itemView);
-            imgDownload = itemView.findViewById(R.id.imgBackground);
         }
     }
 }

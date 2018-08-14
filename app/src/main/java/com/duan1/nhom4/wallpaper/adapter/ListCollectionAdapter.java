@@ -30,9 +30,8 @@ public class ListCollectionAdapter extends RecyclerView.Adapter<ListCollectionAd
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.item_download_favorite,parent,false);
+        View itemView = layoutInflater.inflate(R.layout.item_home,parent,false);
         return new ViewHolder(itemView);
-
     }
 
     @Override
@@ -62,7 +61,7 @@ public class ListCollectionAdapter extends RecyclerView.Adapter<ListCollectionAd
 
         public ViewHolder(View itemView) {
             super(itemView);
-            imgView = itemView.findViewById(R.id.imgBackground);
+            imgView = itemView.findViewById(R.id.iv_thumb);
         }
     }
 }

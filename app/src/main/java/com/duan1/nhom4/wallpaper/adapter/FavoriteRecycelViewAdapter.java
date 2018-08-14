@@ -71,7 +71,7 @@ public class FavoriteRecycelViewAdapter extends RecyclerView.Adapter<FavoriteRec
 
         public ViewHoder(View itemView) {
             super(itemView);
-            imgItemFavorite = itemView.findViewById(R.id.imgBackground);
+            imgItemFavorite = itemView.findViewById(R.id.iv_thumb);
         }
     }
 

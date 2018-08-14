@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.duan1.nhom4.wallpaper.R;
-import com.duan1.nhom4.wallpaper.rest.RestClient;
+import com.duan1.nhom4.wallpaper.rest.RestClientSignIn;
 import com.duan1.nhom4.wallpaper.uis.BaseActivity;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -113,7 +113,7 @@ public class SignInActivity extends BaseActivity {
 
     //PHong lam API
     private void setBtnLogIn(final String user, final String password) {
-        Call<JsonElement> callNonce = RestClient.getApiInterface().callGetNonceLogin("auth", "generate_auth_cookie");
+        Call<JsonElement> callNonce = RestClientSignIn.getApiInterface().callGetNonceLogin("auth", "generate_auth_cookie");
         callNonce.enqueue(new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
@@ -121,7 +121,7 @@ public class SignInActivity extends BaseActivity {
                 JsonObject jsonObject = jsonElement.getAsJsonObject();
                 String nonce = jsonObject.get("nonce").getAsString();
 //                Log.e("ok",nonce);
-                Call<JsonElement> callLogin = RestClient.getApiLogin().login(nonce, user, password, "cool");
+                Call<JsonElement> callLogin = RestClientSignIn.getApiLogin().login(nonce, user, password, "cool");
                 callLogin.enqueue(new Callback<JsonElement>() {
                     @Override
                     public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {

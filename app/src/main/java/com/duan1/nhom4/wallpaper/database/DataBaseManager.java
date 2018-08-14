@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.duan1.nhom4.wallpaper.model.DownloadModel;
 import com.duan1.nhom4.wallpaper.model.FavoriteModel;
@@ -29,6 +30,7 @@ public class DataBaseManager extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(FavoriteModel.CREATE_TABLE);
         db.execSQL(DownloadModel.CREATE_TABLE);
+        Toast.makeText(context, "Create DB", Toast.LENGTH_SHORT).show();
     }
 
     @Override

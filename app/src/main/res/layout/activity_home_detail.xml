@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,72 +8,88 @@
 
     <ImageView
         android:id="@+id/imgHomeDetail"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:src="@drawable/background" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbarHomeDetail"
+        app:srcCompat="@drawable/background" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarHomeDetail"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize">
+        android:layout_height="?android:attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
     </android.support.v7.widget.Toolbar>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_gravity="bottom"
-        android:alpha="0.7"
-        android:background="#fff"
-        android:padding="5dp"></FrameLayout>
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="?android:attr/actionBarSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:menu_animationDelayPerItem="50"
+        app:menu_backgroundColor="@android:color/transparent"
+        app:menu_buttonSpacing="5dp"
+        app:menu_colorNormal="@color/colorAccent"
+        app:menu_colorPressed="#E75043"
+        app:menu_colorRipple="#99FFFFFF"
+        app:menu_fab_hide_animation="@anim/fab_scale_down"
+        app:menu_fab_show_animation="@anim/fab_scale_up"
+        app:menu_fab_size="normal"
+        app:menu_icon="@drawable/fab_add"
+        app:menu_openDirection="up"
+        app:menu_shadowColor="#66000000"
+        app:menu_shadowRadius="4dp"
+        app:menu_shadowXOffset="1dp"
+        app:menu_shadowYOffset="3dp"
+        app:menu_showShadow="true">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_gravity="bottom"
-        android:padding="5dp">
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="shareAction"
+            android:src="@drawable/ic_share_white_24dp"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_size="mini" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="10">
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_set_wallpaper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="ApplyWallpaper"
+            android:src="@drawable/ic_phone_android_white_24dp"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_size="mini" />
 
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="favoriteEvent"
+            android:src="@drawable/ic_favorite_white_24dp"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_size="mini" />
 
-            <android.support.v7.widget.AppCompatButton
-                style="@style/btnApply"
-                android:onClick="ApplyWallpaper"
-                android:layout_width="0dp"
-                android:id="@+id/btnApply"
-                android:layout_height="match_parent"
-                android:layout_weight="5"
-                android:text="Apply"
-                android:textAllCaps="false"
-                android:textSize="25dp" />
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="downLoadImg"
+            android:src="@drawable/ic_download_white_24dp"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_size="mini" />
 
-            <ImageView
-                android:id="@+id/imgHomeDetailDownload"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="5dp"
-                android:layout_weight="1.3"
-                android:onClick="downLoadImg"
-                android:src="@drawable/ic_action_download" />
+    </com.github.clans.fab.FloatingActionMenu>
 
-
-            <ImageView
-                android:id="@+id/imgHomeDetailFavorite"
-                android:layout_width="0dp"
-                android:onClick="favoriteEvent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="5dp"
-                android:layout_weight="1.3"
-                android:src="@drawable/ic_action_star_0" />
-
-        </LinearLayout>
-
-    </FrameLayout>
-
-</FrameLayout>
+</android.support.constraint.ConstraintLayout>
