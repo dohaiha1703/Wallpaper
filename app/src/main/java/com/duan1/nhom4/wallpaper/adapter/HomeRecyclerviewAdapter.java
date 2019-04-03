@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.model.HDWALLPAPER;
 import com.duan1.nhom4.wallpaper.model.ListImage;
@@ -49,6 +50,8 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
         Glide
                 .with(mContext)
                 .load(hdwallpaper.getWallpaperImage())
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.image_loader))
                 .into(holder.imgItemHome);
 
         holder.imgItemHome.setOnClickListener(new View.OnClickListener() {

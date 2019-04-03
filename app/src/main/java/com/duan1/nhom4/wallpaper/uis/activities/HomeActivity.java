@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.duan1.nhom4.wallpaper.AboutUsActivity;
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.SettingActivity;
 import com.duan1.nhom4.wallpaper.adapter.CollectionAdapter;
@@ -40,6 +41,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -81,6 +83,7 @@ public class HomeActivity extends BaseActivity {
         toolbarTitle = findViewById(R.id.toolbar_title);
 
         recyclerView = findViewById(R.id.rvHomeItem);
+        recyclerView.setHasFixedSize(true);
 
         listLink = new ArrayList<>();
         listNameImage = new ArrayList<>();
@@ -91,7 +94,6 @@ public class HomeActivity extends BaseActivity {
         adapterCollection = new CollectionAdapter(items, HomeActivity.this);
 
         dbManager = new DataBaseManager(this);
-
     }
 
     @Override
@@ -160,9 +162,7 @@ public class HomeActivity extends BaseActivity {
                         break;
 
                     case R.id.about:
-                        String urlUs = "https://www.facebook.com/Spetacular-Wallpaper-957755497747573/";
-                        Intent intent2 = new Intent(Intent.ACTION_VIEW);
-                        intent2.setData(Uri.parse(urlUs));
+                        Intent intent2 = new Intent(HomeActivity.this, AboutUsActivity.class);
                         startActivity(intent2);
                         break;
 
