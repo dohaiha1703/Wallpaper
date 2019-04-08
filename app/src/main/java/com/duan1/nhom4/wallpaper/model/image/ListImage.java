@@ -1,5 +1,5 @@
 
-package com.duan1.nhom4.wallpaper.model;
+package com.duan1.nhom4.wallpaper.model.image;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

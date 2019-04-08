@@ -9,20 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.adapter.HomeRecyclerviewAdapter;
-import com.duan1.nhom4.wallpaper.adapter.ListCollectionAdapter;
-import com.duan1.nhom4.wallpaper.model.HDWALLPAPER;
+import com.duan1.nhom4.wallpaper.model.image.HDWALLPAPER;
 import com.duan1.nhom4.wallpaper.model.ListCollectionItem;
-import com.duan1.nhom4.wallpaper.model.ListImage;
-import com.duan1.nhom4.wallpaper.rest.GetCollectionRestClient;
+import com.duan1.nhom4.wallpaper.model.image.ListImage;
 import com.duan1.nhom4.wallpaper.uis.BaseActivity;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,11 +27,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CollectionList extends BaseActivity {
     private Toolbar toolbar;
@@ -47,20 +36,25 @@ public class CollectionList extends BaseActivity {
     private List<String> links;
     private String idPost, namePost;
     private ProgressDialog dialog;
-    private final static String INTENT_KEY_COLLECTION_LIST = "INTENT_KEY_COLLECTION_LIST";
+    private final static String INTENT_KEY_COLLECTION_LIST_STRING = "INTENT_KEY_COLLECTION_LIST_STRING";
+    private final static String INTENT_KEY_COLLECTION_LIST_ID = "INTENT_KEY_COLLECTION_LIST_ID";
     private List<HDWALLPAPER> mWallpapers;
-    private String url = "http://www.tapetee.com/api.php?latest";
+    public static final String BASE_URL = "http://www.tapetee.com//api.php?cat_id=";
+    private String url;
 
 
-    public static Intent createIntent(Context context, String str) {
+    public static Intent createIntent(Context context, String str, String id) {
         Intent intent = new Intent(context, CollectionList.class);
-        intent.putExtra(INTENT_KEY_COLLECTION_LIST, str);
+        intent.putExtra(INTENT_KEY_COLLECTION_LIST_STRING, str);
+        intent.putExtra(INTENT_KEY_COLLECTION_LIST_ID, id);
         return intent;
     }
 
     private void getIncomingData() {
-        if (getIntent().hasExtra(INTENT_KEY_COLLECTION_LIST)) {
-            namePost = getIntent().getStringExtra(INTENT_KEY_COLLECTION_LIST);
+        if (getIntent().hasExtra(INTENT_KEY_COLLECTION_LIST_STRING) && getIntent().hasExtra(INTENT_KEY_COLLECTION_LIST_ID)) {
+            namePost = getIntent().getStringExtra(INTENT_KEY_COLLECTION_LIST_STRING);
+            url = BASE_URL + getIntent().getStringExtra(INTENT_KEY_COLLECTION_LIST_ID);
+            Log.d("ha123", "getIncomingData: " + url);
         }
     }
 
@@ -117,39 +111,6 @@ public class CollectionList extends BaseActivity {
 
     }
 
-    private void getLinkMedia() {
-        retrofit2.Call<JsonElement> call = GetCollectionRestClient.getCollectionApiInterface().
-                getMediaForCollection(idPost, "100");
-
-        call.enqueue(new Callback<JsonElement>() {
-            @Override
-            public void onResponse(retrofit2.Call<JsonElement> call, Response<JsonElement> response) {
-
-                JsonElement jsonElement = response.body();
-                JsonArray jsonArray = jsonElement.getAsJsonArray();
-                if (jsonArray.size() > 0) {
-                    for (int i = 0; i < jsonArray.size(); i++) {
-                        JsonObject objectImg = jsonArray.get(i).getAsJsonObject();
-                        String link = objectImg.get("source_url").getAsString();
-
-                        JsonObject titleObject = objectImg.getAsJsonObject("title");
-                        String name = titleObject.get("rendered").getAsString();
-                        links.add(link);
-                    }
-                    fakeData();
-                    dialog.dismiss();
-                }
-            }
-
-            @Override
-            public void onFailure(retrofit2.Call<JsonElement> call, Throwable t) {
-                Toast.makeText(CollectionList.this, "Error Loading", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
-
-
     private void showSpinerProgress() {
 
         //lap thong tin
@@ -168,13 +129,6 @@ public class CollectionList extends BaseActivity {
 
         //show dialog
         dialog.show();
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                dialog.dismiss();
-            }
-        }, 20000000);
     }
 
     class MyAsyncTask extends AsyncTask<String, Long, String> {

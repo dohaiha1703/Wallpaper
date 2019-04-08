@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GetAllImageRestClient {
 
-    public static final String BASE_URL = "http://www.tapetee.com/";
+    public static final String BASE_URL = "http://www.tapetee.com//";
     private static Retrofit retrofit;
 
     public static Retrofit getRestClient() {
@@ -17,7 +17,7 @@ public class GetAllImageRestClient {
         return retrofit;
     }
 
-    public static GetAllImageApiInterface getApiInterface() {
-        return getRestClient().create(GetAllImageApiInterface.class);
+    public static ApiInterFace getApiInterface() {
+        return getRestClient().create(ApiInterFace.class);
     }
 }

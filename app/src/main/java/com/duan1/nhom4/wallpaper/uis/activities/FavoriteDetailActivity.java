@@ -2,10 +2,13 @@ package com.duan1.nhom4.wallpaper.uis.activities;
 
 import android.app.ProgressDialog;
 import android.app.WallpaperManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -30,6 +33,7 @@ public class FavoriteDetailActivity extends BaseActivity {
     private boolean check = true;
     private List<FavoriteModel> favoriteModels;
     private int pos;
+    private int count;
 
 
     @Override
@@ -47,6 +51,7 @@ public class FavoriteDetailActivity extends BaseActivity {
         favoriteModels = dbManager.getAllFavorite();
 
         getIncomingIntent();
+        count = 0;
     }
 
 
@@ -93,10 +98,37 @@ public class FavoriteDetailActivity extends BaseActivity {
     }
 
     public void applyFavoriteWallpaper(View view) {
-        new setWallpaer().execute(imgUrl);
+        showAlertDialogSingleChoice();
     }
 
-    public class setWallpaer extends AsyncTask<String, Void, Bitmap> {
+    public void showAlertDialogSingleChoice() {
+
+        android.support.v7.app.AlertDialog.Builder builder =
+                new android.support.v7.app.AlertDialog.Builder(FavoriteDetailActivity.this);
+
+        builder.setTitle("What would you like?");
+
+        final String[] list = {"Set as Home Screen", "Set as Lock Screen", "Set Both"};
+
+        builder.setSingleChoiceItems(list, 0, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                count = which;
+            }
+        });
+
+        builder.setPositiveButton("Apply", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.e("count", count + "");
+                new SetWallpaer().execute(imgUrl);
+            }
+        });
+        builder.show();
+    }
+
+
+    public class SetWallpaer extends AsyncTask<String, Void, Bitmap> {
 
         @Override
         protected Bitmap doInBackground(String... strings) {
@@ -125,11 +157,34 @@ public class FavoriteDetailActivity extends BaseActivity {
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmapUse);
 
-
-            WallpaperManager wallpaperManager = WallpaperManager.getInstance(getBaseContext());
+//            WallpaperManager wallpaperManager = WallpaperManager.getInstance(getBaseContext());
 
             try {
-                wallpaperManager.setBitmap(bitmapUse);
+                if (count == 0) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        WallpaperManager.getInstance(getApplicationContext()).
+                                setBitmap(bitmapUse, null, true, WallpaperManager.FLAG_SYSTEM);
+                    }
+                } else if (count == 1) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        WallpaperManager.getInstance(getApplicationContext()).
+                                setBitmap(bitmapUse, null, true, WallpaperManager.FLAG_LOCK);
+                    } else {
+                        Toast.makeText(mContext, "SDK >= 24", Toast.LENGTH_SHORT).show();
+                    }
+                } else if (count == 2) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        WallpaperManager.getInstance(getApplicationContext()).
+                                setBitmap(bitmapUse, null, true, WallpaperManager.FLAG_LOCK);
+
+                        WallpaperManager.getInstance(getApplicationContext()).setBitmap(bitmapUse);
+                    } else {
+                        Toast.makeText(mContext, "SDK >= 24", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(mContext, "Error", Toast.LENGTH_SHORT).show();
+                }
+
                 progressDialog.dismiss();
                 Toast.makeText(FavoriteDetailActivity.this, "Succeed", Toast.LENGTH_SHORT).show();
             } catch (IOException e) {

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.model.FavoriteModel;
 import com.duan1.nhom4.wallpaper.uis.activities.FavoriteDetailActivity;
+import com.duan1.nhom4.wallpaper.uis.activities.HomeDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -56,6 +57,16 @@ public class FavoriteRecycelViewAdapter extends RecyclerView.Adapter<FavoriteRec
                 intent.putExtra("img_pos", position);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
+                mContext.startActivity(intent);
+            }
+        });
+
+        holder.imgItemFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, FavoriteDetailActivity.class);
+                intent.putExtra("img_url", model.getFavoriteImage());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
         });

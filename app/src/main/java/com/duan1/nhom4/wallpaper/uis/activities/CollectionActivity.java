@@ -7,17 +7,26 @@ import android.view.View;
 
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.adapter.CollectionAdapter;
-import com.duan1.nhom4.wallpaper.model.CollectionsItem;
+import com.duan1.nhom4.wallpaper.model.cate.CATEGORY;
+import com.duan1.nhom4.wallpaper.model.cate.CateItem;
+import com.duan1.nhom4.wallpaper.rest.GetAllImageRestClient;
 import com.duan1.nhom4.wallpaper.uis.BaseActivity;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CollectionActivity extends BaseActivity {
     Toolbar toolbar;
     private RecyclerView recyclerView;
     private CollectionAdapter adapter;
-    private List<CollectionsItem> items;
+    private List<CATEGORY> items;
 
 
     @Override
@@ -32,7 +41,6 @@ public class CollectionActivity extends BaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         items = new ArrayList<>();
-        adapter = new CollectionAdapter(items, CollectionActivity.this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -47,21 +55,31 @@ public class CollectionActivity extends BaseActivity {
                 finish();
             }
         });
-        fakeData();
     }
 
-    private void fakeData() {
-        CollectionsItem item1 = new CollectionsItem("Anime",
-                R.drawable.cate_anime, "");
+    private void getAllCate() {
+        Call<JsonElement> call = GetAllImageRestClient.getApiInterface().getCategories();
+        call.enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                JsonElement jsonElement = response.body();
+                JsonObject jsonObject = jsonElement.getAsJsonObject();
+                CateItem cateItem = new Gson().fromJson(jsonObject, CateItem.class);
+                items = cateItem.getCATEGORY();
 
-        CollectionsItem item2 = new CollectionsItem("Girl",
-                R.drawable.cate_girl, "");
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(CollectionActivity.this);
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setAdapter(adapter);
 
-        CollectionsItem item3 = new CollectionsItem("3D",
-                R.drawable.cate_3d, "");
-        items.add(item1);
-        items.add(item2);
-        items.add(item3);
-        adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
+
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+
+            }
+        });
     }
 }

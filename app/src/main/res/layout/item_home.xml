@@ -34,6 +34,7 @@
             app:srcCompat="@drawable/ic_eye_white_24dp" />
 
         <TextView
+            android:id="@+id/tv_view_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -42,6 +43,7 @@
             android:textSize="12sp" />
 
         <ImageView
+            android:id="@+id/iv_favorite"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="20dp"

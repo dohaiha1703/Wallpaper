@@ -13,44 +13,36 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.duan1.nhom4.wallpaper.R;
-import com.duan1.nhom4.wallpaper.database.DataBaseManager;
-import com.duan1.nhom4.wallpaper.model.FavoriteModel;
-import com.duan1.nhom4.wallpaper.model.image.HDWALLPAPER;
+import com.duan1.nhom4.wallpaper.model.gif.GifImage;
 import com.duan1.nhom4.wallpaper.uis.activities.HomeDetailActivity;
 
 import java.util.List;
 
-public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclerviewAdapter.ViewHolder> {
+public class GifAdapter extends RecyclerView.Adapter<GifAdapter.ViewHolder> {
 
-    private List<HDWALLPAPER> homeItems;
     private Context mContext;
+    private List<GifImage> mGIFS;
 
-
-    public HomeRecyclerviewAdapter(List<HDWALLPAPER> homeItems, Context mContext) {
-        this.homeItems = homeItems;
-        this.mContext = mContext;
-
+    public GifAdapter(Context context, List<GifImage> GIFS) {
+        mContext = context;
+        mGIFS = GIFS;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.item_home, parent, false);
-        return new ViewHolder(itemView);
+        View itemView = inflater.inflate(R.layout.item_download_favorite, parent, false);
+        return new GifAdapter.ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-
-        final HDWALLPAPER hdwallpaper = homeItems.get(position);
-
-        holder.tvViewNumber.setText(hdwallpaper.getTotalViews());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        final GifImage gif = mGIFS.get(position);
 
         Glide
-                .with(mContext)
-                .load(hdwallpaper.getWallpaperImage())
+                .with(mContext).asBitmap()
+                .load(gif.getGifImage())
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.image_loader))
                 .into(holder.imgItemHome);
@@ -59,41 +51,28 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, HomeDetailActivity.class);
-                intent.putExtra("img_url", hdwallpaper.getWallpaperImage());
+                intent.putExtra("img_url", gif.getGifImage());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
         });
 
-        DataBaseManager dbManager = new DataBaseManager(mContext);
-        List<FavoriteModel> favoriteModels = dbManager.getAllFavorite();
-        for (int i = 0; i < favoriteModels.size(); i++) {
-            if (hdwallpaper.getWallpaperImage().equals(favoriteModels.get(i).getFavoriteImage())) {
-                holder.imgFavorite.setImageResource(R.drawable.ic_favorite_white_24dp);
-            }
-        }
-
     }
-
 
     @Override
     public int getItemCount() {
-        return homeItems.size() > 0 ? homeItems.size() : 0;
+        return mGIFS.size() > 0 ? mGIFS.size() : 0;
     }
-
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView imgItemHome;
-        public ImageView imgFavorite;
-        public TextView tvViewNumber;
+        public TextView tvItemHome;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             imgItemHome = itemView.findViewById(R.id.iv_thumb);
-            imgFavorite = itemView.findViewById(R.id.iv_favorite);
-            tvViewNumber = itemView.findViewById(R.id.tv_view_number);
         }
     }
 }

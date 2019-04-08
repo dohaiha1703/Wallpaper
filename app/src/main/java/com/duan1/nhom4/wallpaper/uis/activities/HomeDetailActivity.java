@@ -85,14 +85,6 @@ public class HomeDetailActivity extends BaseActivity {
                 check = true;
             }
         }
-
-        downloadModels = dbManager.getAllDownload();
-        for (int j = 0; j < downloadModels.size(); j++) {
-            if (imgUrl.equals(downloadModels.get(j).getPlaceImage())) {
-                mButtonDownload.setClickable(false);
-                mButtonDownload.setColorNormal(R.color.cardview_dark_background);
-            }
-        }
     }
 
     public void favoriteEvent(View view) {
@@ -130,8 +122,15 @@ public class HomeDetailActivity extends BaseActivity {
                 Uri.parse(url));
         mRqRequest.setDescription("This was downloaded from Wallpaer");
 //        mRqRequest.setDestinationUri(Uri.parse("give your local path"));
+        mButtonDownload.setClickable(false);
+        mButtonDownload.setColorNormal(R.color.cardview_dark_background);
+
         mRqRequest.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+
         long idDownLoad = mManager.enqueue(mRqRequest);
+
+        mButtonDownload.setClickable(true);
+        mButtonDownload.setColorNormal(R.color.colorAccent);
 
     }
 

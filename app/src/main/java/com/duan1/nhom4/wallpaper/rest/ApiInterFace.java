@@ -5,7 +5,14 @@ import com.google.gson.JsonElement;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public interface GetAllImageApiInterface {
+public interface ApiInterFace {
     @GET("api.php?latest")
     Call<JsonElement> getAllMedia();
+
+    @GET("api.php?cat_list")
+    Call<JsonElement> getCategories();
+
+    @GET("api.php?gif_list")
+    Call<JsonElement> getGifList();
 }
+
