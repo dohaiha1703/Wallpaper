@@ -21,19 +21,25 @@ import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.database.DataBaseManager;
 import com.duan1.nhom4.wallpaper.model.DownloadModel;
 import com.duan1.nhom4.wallpaper.model.FavoriteModel;
+import com.duan1.nhom4.wallpaper.rest.GetAllImageRestClient;
 import com.duan1.nhom4.wallpaper.uis.BaseActivity;
 import com.github.clans.fab.FloatingActionButton;
+import com.google.gson.JsonElement;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeDetailActivity extends BaseActivity {
 
     private android.support.v7.widget.Toolbar toolbar;
     private ImageView imgHomeDetail;
     private Bitmap bitmapUse;
-    private String imgUrl;
+    private String imgUrl, wallpaperID;
     private ProgressDialog progressDialog;
     private DataBaseManager dbManager;
     private boolean check = true;
@@ -65,7 +71,7 @@ public class HomeDetailActivity extends BaseActivity {
 
     @Override
     public void intialVariables() {
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_arrow_left);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +110,20 @@ public class HomeDetailActivity extends BaseActivity {
                     .with(HomeDetailActivity.this)
                     .load(imgUrl)
                     .into(imgHomeDetail);
+            wallpaperID = getIntent().getStringExtra("wallpaper_id");
         }
+        Call<JsonElement> call = GetAllImageRestClient.getApiInterface().getSingleImage(wallpaperID);
+        call.enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+
+            }
+        });
     }
 
     public void downLoadImg(View view) {

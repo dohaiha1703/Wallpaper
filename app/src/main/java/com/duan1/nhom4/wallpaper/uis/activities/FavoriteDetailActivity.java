@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.database.DataBaseManager;
 import com.duan1.nhom4.wallpaper.model.FavoriteModel;
@@ -57,7 +58,7 @@ public class FavoriteDetailActivity extends BaseActivity {
 
     @Override
     public void intialVariables() {
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_arrow_left);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,18 +71,10 @@ public class FavoriteDetailActivity extends BaseActivity {
         imgSetFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (check) {
-                    dbManager.deleteFavoriteItem(favoriteModels.get(pos));
-                    imgSetFavorite.setVisibility(View.INVISIBLE);
-                    check = false;
-                    finish();
-                    startActivity(new Intent(FavoriteDetailActivity.this, FavoriteActivity.class));
-                }
-//                else if (check == false) {
-//                    dbManager.insertFavorite(imgUrl);
-//                    imgSetFavorite.setImageResource(R.drawable.ic_action_star_10);
-//                    check = true;
-//                }
+                dbManager.deleteFavoriteItem(favoriteModels.get(pos));
+                Log.d("ha123", favoriteModels.size() + "");
+                imgSetFavorite.setVisibility(View.INVISIBLE);
+                finish();
             }
         });
     }
@@ -90,7 +83,8 @@ public class FavoriteDetailActivity extends BaseActivity {
         if (getIntent().hasExtra("img_url")) {
             imgUrl = getIntent().getStringExtra("img_url");
             pos = getIntent().getIntExtra("img_pos", pos);
-            Picasso
+            Log.d("ha123", "pos: " + pos);
+            Glide
                     .with(FavoriteDetailActivity.this)
                     .load(imgUrl)
                     .into(imgFavorite);

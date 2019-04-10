@@ -67,7 +67,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="5dp"
                 android:layout_weight="1.3"
-                app:srcCompat="@drawable/ic_favorite_red_24dp" />
+                app:srcCompat="@drawable/ic_delete" />
 
         </LinearLayout>
 

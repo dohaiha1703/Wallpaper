@@ -32,6 +32,10 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
 
     }
 
+    public void getImageList(List<HDWALLPAPER> list){
+        homeItems = list;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,9 +54,8 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
 
         Glide
                 .with(mContext)
-                .load(hdwallpaper.getWallpaperImage())
-                .apply(new RequestOptions()
-                        .placeholder(R.drawable.image_loader))
+                .load(hdwallpaper.getWallpaperImageThumb())
+                .apply(new RequestOptions().placeholder(R.drawable.image_loader))
                 .into(holder.imgItemHome);
 
         holder.imgItemHome.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +63,7 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, HomeDetailActivity.class);
                 intent.putExtra("img_url", hdwallpaper.getWallpaperImage());
+                intent.putExtra("wallpaper_id", hdwallpaper.getId());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
@@ -69,10 +73,15 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
         List<FavoriteModel> favoriteModels = dbManager.getAllFavorite();
         for (int i = 0; i < favoriteModels.size(); i++) {
             if (hdwallpaper.getWallpaperImage().equals(favoriteModels.get(i).getFavoriteImage())) {
-                holder.imgFavorite.setImageResource(R.drawable.ic_favorite_white_24dp);
+                hdwallpaper.setFavorite(true);
             }
         }
 
+        if (hdwallpaper.isFavorite() == true){
+            holder.imgFavorite.setImageResource(R.drawable.ic_favorite_white_24dp);
+        }else {
+            holder.imgFavorite.setImageResource(R.drawable.ic_favorite_border_white_24dp);
+        }
     }
 
 
@@ -91,7 +100,7 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
         public ViewHolder(View itemView) {
             super(itemView);
 
-            imgItemHome = itemView.findViewById(R.id.iv_thumb);
+            imgItemHome = itemView.findViewById(R.id.iv_thumb_home);
             imgFavorite = itemView.findViewById(R.id.iv_favorite);
             tvViewNumber = itemView.findViewById(R.id.tv_view_number);
         }

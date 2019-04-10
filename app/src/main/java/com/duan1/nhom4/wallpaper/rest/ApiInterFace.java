@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface ApiInterFace {
     @GET("api.php?latest")
@@ -14,5 +15,8 @@ public interface ApiInterFace {
 
     @GET("api.php?gif_list")
     Call<JsonElement> getGifList();
+
+    @GET("api.php?")
+    Call<JsonElement> getSingleImage(@Query("wallpaper_id") String id);
 }
 

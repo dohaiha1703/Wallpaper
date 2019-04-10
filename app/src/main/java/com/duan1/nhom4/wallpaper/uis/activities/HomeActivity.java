@@ -4,9 +4,11 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -14,10 +16,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,6 +69,8 @@ public class HomeActivity extends BaseActivity {
     private FavoriteRecycelViewAdapter adapterFavorite;
     private List<CATEGORY> mCATEGORIES;
     private List<GifImage> mGIFS;
+    private HomeRecyclerviewAdapter adapter;
+    private GifAdapter gifAdapter;
 
     @Override
     public int injectLayout() {
@@ -83,6 +89,15 @@ public class HomeActivity extends BaseActivity {
 
         dialog = new ProgressDialog(HomeActivity.this);
         dbManager = new DataBaseManager(this);
+
+        mWallpapers = new ArrayList<>();
+        mGIFS = new ArrayList<>();
+
+        adapter = new HomeRecyclerviewAdapter(mWallpapers, this);
+        gifAdapter = gifAdapter = new GifAdapter(HomeActivity.this, mGIFS);
+
+        favoriteModels = dbManager.getAllFavorite();
+        adapterFavorite = new FavoriteRecycelViewAdapter(favoriteModels, this);
     }
 
     @Override
@@ -166,6 +181,7 @@ public class HomeActivity extends BaseActivity {
                         break;
 
                     case R.id.gif:
+                        showSpinerProgress();
                         gifClicked();
                         break;
 
@@ -229,7 +245,39 @@ public class HomeActivity extends BaseActivity {
             }
         });
     }
-//    private void getLinkAllMedia() {
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (recyclerView != null && recyclerView.getAdapter() == adapter) {
+            adapter.notifyDataSetChanged();
+            return;
+        }
+        if (recyclerView != null && recyclerView.getAdapter() == gifAdapter) {
+            gifAdapter.notifyDataSetChanged();
+            return;
+        }
+        if (recyclerView != null && recyclerView.getAdapter() == adapterFavorite) {
+            adapterFavorite.addList(dbManager.getAllFavorite());
+            Log.d("ha123", dbManager.getAllFavorite().size() + "");
+            adapterFavorite.notifyDataSetChanged();
+            Log.d("ha123", "noti");
+            return;
+        }
+    }
+
+    private void setAppTheme(String currentTheme) {
+        switch (currentTheme) {
+            case MINT_THEME:
+                setTheme(R.style.Theme_App_Mint);
+                break;
+            case LILAC_THEME:
+                setTheme(R.style.Theme_App_Lilac);
+                break;
+        }
+    }
+
+    //    private void getLinkAllMedia() {
 //        Call<JsonElement> call = GetAllImageRestClient.getApiInterface().getAllMedia();
 //        call.enqueue(new Callback<JsonElement>() {
 //            @Override
@@ -240,7 +288,7 @@ public class HomeActivity extends BaseActivity {
 //                    for (int i = 0; i < jsonArray.size(); i++) {
 //                        JsonObject objectImg = jsonArray.get(i).getAsJsonObject();
 //                        String link = objectImg.get("source_url").getAsString();
-//
+// ***********************************bóc json thô khổ sở vãi************************************
 //                        JsonObject titleObject = objectImg.getAsJsonObject("title");
 //                        String name = titleObject.get("rendered").getAsString();
 //                        listLink.add(link);
@@ -268,15 +316,12 @@ public class HomeActivity extends BaseActivity {
                 JsonElement jsonElement = response.body();
                 JsonObject jsonObject = jsonElement.getAsJsonObject();
                 ListImage example = new Gson().fromJson(jsonObject, ListImage.class);
-                mWallpapers = example.getHDWALLPAPER();
-
-                HomeRecyclerviewAdapter adapter = new HomeRecyclerviewAdapter(mWallpapers, getApplicationContext());
+                adapter.getImageList(example.getHDWALLPAPER());
                 RecyclerView.LayoutManager layoutManager = new GridLayoutManager(HomeActivity.this, 2);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adapter);
 
                 adapter.notifyDataSetChanged();
-
                 dialog.dismiss();
             }
 
@@ -328,8 +373,9 @@ public class HomeActivity extends BaseActivity {
 
     private void favoriteClicked() {
         toolbarTitle.setText("Favorite");
-        favoriteModels = dbManager.getAllFavorite();
-        adapterFavorite = new FavoriteRecycelViewAdapter(favoriteModels, this);
+
+        adapterFavorite.addList(dbManager.getAllFavorite());
+
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapterFavorite);
@@ -350,8 +396,10 @@ public class HomeActivity extends BaseActivity {
 
                 CollectionAdapter adapterCollection = new CollectionAdapter(HomeActivity.this, mCATEGORIES);
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(HomeActivity.this);
+
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adapterCollection);
+
                 adapterCollection.notifyDataSetChanged();
 
                 dialog.dismiss();
@@ -366,7 +414,6 @@ public class HomeActivity extends BaseActivity {
 
 
     private void getAllGif() {
-        mGIFS = new ArrayList<>();
 
         Call<JsonElement> call = GetAllImageRestClient.getApiInterface().getGifList();
         call.enqueue(new Callback<JsonElement>() {
@@ -376,14 +423,14 @@ public class HomeActivity extends BaseActivity {
 
                 JsonObject jsonObject = jsonElement.getAsJsonObject();
                 GIF gif = new Gson().fromJson(jsonObject, GIF.class);
-                mGIFS = gif.getAllGif();
+                gifAdapter.addList(gif.getAllGif());
 
-                GifAdapter adapter = new GifAdapter(HomeActivity.this, mGIFS);
+
                 RecyclerView.LayoutManager layoutManager = new GridLayoutManager(HomeActivity.this, 2);
                 recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setAdapter(adapter);
+                recyclerView.setAdapter(gifAdapter);
 
-                adapter.notifyDataSetChanged();
+                gifAdapter.notifyDataSetChanged();
 
                 dialog.dismiss();
             }

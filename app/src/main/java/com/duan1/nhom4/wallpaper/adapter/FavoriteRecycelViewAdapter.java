@@ -9,10 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.duan1.nhom4.wallpaper.R;
 import com.duan1.nhom4.wallpaper.model.FavoriteModel;
 import com.duan1.nhom4.wallpaper.uis.activities.FavoriteDetailActivity;
-import com.duan1.nhom4.wallpaper.uis.activities.HomeDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -26,6 +27,10 @@ public class FavoriteRecycelViewAdapter extends RecyclerView.Adapter<FavoriteRec
     public FavoriteRecycelViewAdapter(List<FavoriteModel> listFavoriteLink, Context mContext) {
         this.listFavoriteLink = listFavoriteLink;
         this.mContext = mContext;
+    }
+
+    public void addList(List<FavoriteModel> list) {
+        listFavoriteLink = list;
     }
 
     @NonNull
@@ -42,11 +47,11 @@ public class FavoriteRecycelViewAdapter extends RecyclerView.Adapter<FavoriteRec
 
         final FavoriteModel model = listFavoriteLink.get(position);
 
-        Picasso
+        Glide
                 .with(mContext)
                 .load(model.getFavoriteImage())
+                .apply(new RequestOptions().placeholder(R.drawable.image_loader))
                 .into(holder.imgItemFavorite);
-
 
 
         holder.imgItemFavorite.setOnClickListener(new View.OnClickListener() {
@@ -61,15 +66,15 @@ public class FavoriteRecycelViewAdapter extends RecyclerView.Adapter<FavoriteRec
             }
         });
 
-        holder.imgItemFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, FavoriteDetailActivity.class);
-                intent.putExtra("img_url", model.getFavoriteImage());
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
-            }
-        });
+//        holder.imgItemFavorite.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(mContext, FavoriteDetailActivity.class);
+//                intent.putExtra("img_url", model.getFavoriteImage());
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                mContext.startActivity(intent);
+//            }
+//        });
     }
 
     @Override
@@ -82,7 +87,7 @@ public class FavoriteRecycelViewAdapter extends RecyclerView.Adapter<FavoriteRec
 
         public ViewHoder(View itemView) {
             super(itemView);
-            imgItemFavorite = itemView.findViewById(R.id.iv_thumb);
+            imgItemFavorite = itemView.findViewById(R.id.iv_thumb_favorite);
         }
     }
 

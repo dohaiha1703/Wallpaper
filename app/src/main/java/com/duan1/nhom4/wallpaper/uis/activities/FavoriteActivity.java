@@ -32,10 +32,15 @@ public class FavoriteActivity extends BaseActivity {
         toolbar = findViewById(R.id.toolbarFavoriteActivity);
         dbManager = new DataBaseManager(FavoriteActivity.this);
 
-
         recyclerPlace = findViewById(R.id.recyclerView);
         favoriteModels = dbManager.getAllFavorite();
         adapter = new FavoriteRecycelViewAdapter(favoriteModels, FavoriteActivity.this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
     }
 
     @Override

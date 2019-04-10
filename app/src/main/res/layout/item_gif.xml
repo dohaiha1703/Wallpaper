@@ -7,7 +7,7 @@
     android:layout_margin="4dp">
 
     <ImageView
-        android:id="@+id/iv_thumb_home"
+        android:id="@+id/iv_thumb_gif"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitXY"
@@ -33,45 +33,11 @@
             android:id="@+id/imageView11"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_view_number"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/round_purple" />
-
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/round_red" />
-
-        <ImageView
-            android:id="@+id/img"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView10"
-            app:layout_constraintEnd_toEndOf="@+id/imageView10"
-            app:layout_constraintStart_toStartOf="@+id/imageView10"
-            app:layout_constraintTop_toTopOf="@+id/imageView10"
-            app:srcCompat="@drawable/ic_eye_white_24dp" />
-
-        <TextView
-            android:id="@+id/tv_view_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="99"
-            android:textColor="@android:color/white"
-            android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView10"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:srcCompat="@drawable/round_purple" />
 
         <ImageView
             android:id="@+id/iv_favorite"

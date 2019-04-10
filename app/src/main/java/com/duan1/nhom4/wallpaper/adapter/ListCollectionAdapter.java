@@ -61,7 +61,7 @@ public class ListCollectionAdapter extends RecyclerView.Adapter<ListCollectionAd
 
         public ViewHolder(View itemView) {
             super(itemView);
-            imgView = itemView.findViewById(R.id.iv_thumb);
+            imgView = itemView.findViewById(R.id.iv_thumb_home);
         }
     }
 }

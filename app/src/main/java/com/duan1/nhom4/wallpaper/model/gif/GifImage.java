@@ -16,6 +16,16 @@ public class GifImage {
     @Expose
     private String totalViews;
 
+    private boolean favorite;
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
     public String getId() {
         return id;
     }

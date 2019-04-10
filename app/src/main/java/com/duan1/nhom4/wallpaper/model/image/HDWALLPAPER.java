@@ -34,6 +34,16 @@ public class HDWALLPAPER {
     @Expose
     private String categoryImageThumb;
 
+    private boolean isFavorite;
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
+
     public String getId() {
         return id;
     }

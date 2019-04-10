@@ -8,11 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.duan1.nhom4.wallpaper.R;
+import com.duan1.nhom4.wallpaper.database.DataBaseManager;
+import com.duan1.nhom4.wallpaper.model.FavoriteModel;
 import com.duan1.nhom4.wallpaper.model.gif.GifImage;
 import com.duan1.nhom4.wallpaper.uis.activities.HomeDetailActivity;
 
@@ -28,11 +29,15 @@ public class GifAdapter extends RecyclerView.Adapter<GifAdapter.ViewHolder> {
         mGIFS = GIFS;
     }
 
+    public void addList(List<GifImage> gifImages){
+        mGIFS = gifImages;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.item_download_favorite, parent, false);
+        View itemView = inflater.inflate(R.layout.item_gif, parent, false);
         return new GifAdapter.ViewHolder(itemView);
     }
 
@@ -57,6 +62,19 @@ public class GifAdapter extends RecyclerView.Adapter<GifAdapter.ViewHolder> {
             }
         });
 
+        DataBaseManager dbManager = new DataBaseManager(mContext);
+        List<FavoriteModel> favoriteModels = dbManager.getAllFavorite();
+        for (int i = 0; i < favoriteModels.size(); i++) {
+            if (gif.getGifImage().equals(favoriteModels.get(i).getFavoriteImage())) {
+                gif.setFavorite(true);
+            }
+        }
+
+        if (gif.isFavorite() == true) {
+            holder.imgFavorite.setImageResource(R.drawable.ic_favorite_white_24dp);
+        } else {
+            holder.imgFavorite.setImageResource(R.drawable.ic_favorite_border_white_24dp);
+        }
     }
 
     @Override
@@ -67,12 +85,13 @@ public class GifAdapter extends RecyclerView.Adapter<GifAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView imgItemHome;
-        public TextView tvItemHome;
+        public ImageView imgFavorite;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            imgItemHome = itemView.findViewById(R.id.iv_thumb);
+            imgItemHome = itemView.findViewById(R.id.iv_thumb_gif);
+            imgFavorite = itemView.findViewById(R.id.iv_favorite);
         }
     }
 }
